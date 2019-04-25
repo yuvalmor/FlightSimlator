@@ -9,12 +9,13 @@
     <Viewbox>
         <Grid>
             <local:Joystick Height="570" Width="417"></local:Joystick>
-            <Slider HorizontalAlignment="Left" Height="31" Margin="10,481,0,0" VerticalAlignment="Top" Width="386"/>
-            <Slider HorizontalAlignment="Left" Height="44" Margin="-236,260,0,0" VerticalAlignment="Top" Width="386" RenderTransformOrigin="0.5,0.5">
+            <Slider Name="RudderSlider" HorizontalAlignment="Left" Height="31" Margin="10,481,0,0" VerticalAlignment="Top" Width="386"
+                    Minimum="-1" Maximum="1" TickPlacement="BottomRight" TickFrequency="0.1" IsSnapToTickEnabled="True"/>
+            <Slider Name="ThrottleSlider" HorizontalAlignment="Left" Height="44" Margin="-236,260,0,0" VerticalAlignment="Top" 
+                    Width="386" RenderTransformOrigin="0.5,0.5" Minimum="-1" Maximum="1" TickPlacement="BottomRight" TickFrequency="0.1" 
+                   IsSnapToTickEnabled="True">
                 <Slider.RenderTransform>
                     <TransformGroup>
-                        <ScaleTransform/>
-                        <SkewTransform/>
                         <RotateTransform Angle="89.892"/>
                         <TranslateTransform/>
                     </TransformGroup>
@@ -23,14 +24,27 @@
             <Image Margin="-191,282,387.333,253" Source="/FlightSimulator;component/throttle.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5">
                 <Image.RenderTransform>
                     <TransformGroup>
-                        <ScaleTransform/>
-                        <SkewTransform/>
                         <RotateTransform Angle="90.495"/>
                         <TranslateTransform/>
                     </TransformGroup>
                 </Image.RenderTransform>
             </Image>
             <Image Margin="108,520,100.333,17" Source="/FlightSimulator;component/rudder.png" Stretch="Fill"/>
+            <TextBox HorizontalAlignment="Left" BorderThickness="0" Height="54" Margin="-44,25,0,0" FontSize="29" FontWeight="Bold"
+                     Text="{Binding ElementName=ThrottleSlider, Path=Value}" VerticalAlignment="Top" Width="90"/>
+            <TextBox HorizontalAlignment="Left" BorderThickness="0" Height="54" Margin="417,469,-89.667,0" FontSize="29" FontWeight="Bold"
+                     Text="{Binding ElementName=RudderSlider, Path=Value}" VerticalAlignment="Top" Width="90"/>
+            <Image Margin="108,25,107.333,498" Source="/FlightSimulator;component/ailron.png" Stretch="Fill"/>
+            <Image Margin="374,253,-177.667,266" Source="/FlightSimulator;component/elevator.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5">
+                <Image.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="90.087"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Image.RenderTransform>
+            </Image>
         </Grid>
     </Viewbox>
 </UserControl>
