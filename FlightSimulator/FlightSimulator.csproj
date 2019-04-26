@@ -140,16 +140,16 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="throttle.png" />
+    <Resource Include="Photos\throttle.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="rudder.png" />
+    <Resource Include="Photos\rudder.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="ailron.png" />
+    <Resource Include="Photos\ailron.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="elevator.png" />
+    <Resource Include="Photos\elevator.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

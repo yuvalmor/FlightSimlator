@@ -21,7 +21,7 @@
                     </TransformGroup>
                 </Slider.RenderTransform>
             </Slider>
-            <Image Margin="-191,282,387.333,253" Source="/FlightSimulator;component/throttle.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5">
+            <Image Margin="-191,282,387.333,253" Source="/FlightSimulator;component/Photos/throttle.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5">
                 <Image.RenderTransform>
                     <TransformGroup>
                         <RotateTransform Angle="90.495"/>
@@ -29,13 +29,13 @@
                     </TransformGroup>
                 </Image.RenderTransform>
             </Image>
-            <Image Margin="108,520,100.333,17" Source="/FlightSimulator;component/rudder.png" Stretch="Fill"/>
+            <Image Margin="108,520,100.333,17" Source="/FlightSimulator;component/Photos/rudder.png" Stretch="Fill"/>
             <TextBox HorizontalAlignment="Left" BorderThickness="0" Height="54" Margin="-44,25,0,0" FontSize="29" FontWeight="Bold"
                      Text="{Binding ElementName=ThrottleSlider, Path=Value}" VerticalAlignment="Top" Width="90"/>
             <TextBox HorizontalAlignment="Left" BorderThickness="0" Height="54" Margin="417,469,-89.667,0" FontSize="29" FontWeight="Bold"
                      Text="{Binding ElementName=RudderSlider, Path=Value}" VerticalAlignment="Top" Width="90"/>
-            <Image Margin="108,25,107.333,498" Source="/FlightSimulator;component/ailron.png" Stretch="Fill"/>
-            <Image Margin="374,253,-177.667,266" Source="/FlightSimulator;component/elevator.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5">
+            <Image Margin="108,25,107.333,498" Source="/FlightSimulator;component/Photos/ailron.png" Stretch="Fill"/>
+            <Image Margin="374,253,-177.667,266" Source="/FlightSimulator;component/Photos/elevator.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5">
                 <Image.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
