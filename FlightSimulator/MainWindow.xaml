@@ -7,7 +7,6 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        
         <Views:FlightBoard Margin="0,60,383.333,-0.333"></Views:FlightBoard>
         <Views:Controller Margin="415,60,10.333,60.667"></Views:Controller>
         <TextBlock HorizontalAlignment="Left" Margin="305,5,0,0" TextWrapping="Wrap" FontWeight="Bold" Text="Flight Simulator" FontSize="28"  VerticalAlignment="Top" Height="50" Width="220"/>
