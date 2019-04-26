@@ -58,10 +58,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Communication\Client.cs" />
+    <Compile Include="Communication\Server.cs" />
     <Compile Include="Model\ApplicationSettingsModel.cs" />
     <Compile Include="Model\CommandHandler.cs" />
     <Compile Include="Model\EventArgs\VirtualJoystickEventArgs.cs" />
     <Compile Include="Model\Interface\ISettingsModel.cs" />
+    <Compile Include="Utils\Consts.cs" />
     <Compile Include="ViewModels\BaseNotify.cs" />
     <Compile Include="ViewModels\FlightBoardViewModel.cs" />
     <Compile Include="ViewModels\Windows\SettingsWindowViewModel.cs" />
@@ -171,5 +174,6 @@
   <ItemGroup>
     <Resource Include="Photos\sky.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

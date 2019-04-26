@@ -8,7 +8,7 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <local:FlightBoard Margin="0,100,335,0"></local:FlightBoard>
-        <Button  Content="Connect" BorderThickness="2" FontWeight="Bold" HorizontalAlignment="Left" Margin="120,73,0,0" VerticalAlignment="Top" Width="65" />
-        <Button Content="Settings" BorderThickness="2" FontWeight="Bold" HorizontalAlignment="Left" Margin="225,73,0,0" VerticalAlignment="Top" Width="70"/>
+        <Button Content="Connect" BorderThickness="2" FontWeight="Bold" HorizontalAlignment="Left" Margin="120,73,0,0" VerticalAlignment="Top" Width="65" Command="{Binding ConnectCommand}" />
+        <Button Content="Settings" BorderThickness="2" FontWeight="Bold" HorizontalAlignment="Left" Margin="225,73,0,0" VerticalAlignment="Top" Width="70" Command="{Binding SettingsCommand}" />
     </Grid>
 </UserControl>

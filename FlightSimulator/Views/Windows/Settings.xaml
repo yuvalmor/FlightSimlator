@@ -25,7 +25,7 @@ Margin="2.667,3,3,3"></TextBox>
         <TextBlock Grid.Row="2" Padding="3" Margin="3,3,3.333,3">Flight Command Port:</TextBlock>
         <TextBox x:Name="txtCols" Grid.Row="2" Grid.Column="1" Padding="3"
 Margin="2.667,3,3,3"></TextBox>
-        <Button x:Name="OKCommand" Grid.Row="3" HorizontalAlignment="Center" Margin="27,21,53,-11" Padding="5" Width="96">OK</Button>
-        <Button x:Name="CancleCommand" Grid.Row="3" HorizontalAlignment="Right" Margin="0,21,25,-11" Padding="5" Width="96" Grid.Column="1">Cancle</Button>
+        <Button x:Name="OKCommand" Grid.Row="3" HorizontalAlignment="Center" Margin="27,21,53,-11" Padding="5" Width="96" Command="{Binding ClickCommand}">OK</Button>
+        <Button x:Name="CancleCommand" Grid.Row="3" HorizontalAlignment="Right" Margin="0,21,25,-11" Padding="5" Width="96" Grid.Column="1" Command="{Binding CancelCommand}">Cancle</Button>
     </Grid>
 </Window>
