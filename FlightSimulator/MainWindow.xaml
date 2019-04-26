@@ -7,9 +7,9 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Views:FlightBoard Margin="0,60,383.333,-0.333"></Views:FlightBoard>
-        <Views:Controller Margin="415,60,10.333,60.667"></Views:Controller>
-        <TextBlock HorizontalAlignment="Left" Margin="305,5,0,0" TextWrapping="Wrap" FontWeight="Bold" Text="Flight Simulator" FontSize="28"  VerticalAlignment="Top" Height="50" Width="220"/>
-        <Image Margin="525,5,183.333,370.667" Source="/FlightSimulator;component/Photos/airplain.png" Stretch="Fill" RenderTransformOrigin="0.389,0.393"/>
+        <Views:FlightBoardController Margin="0,-14,83.333,-0.333"></Views:FlightBoardController>
+        <Views:Controller Margin="392,60,28.333,60.667"></Views:Controller>
+        <TextBlock HorizontalAlignment="Left" Margin="245,5,0,0" TextWrapping="Wrap" FontWeight="Bold" Text="Flight Simulator" FontSize="28"  VerticalAlignment="Top" Height="50" Width="220"/>
+        <Image Margin="460,5,248.333,370.667" Source="/FlightSimulator;component/Photos/airplain.png" Stretch="Fill" RenderTransformOrigin="0.389,0.393"/>
     </Grid>
 </Window>
