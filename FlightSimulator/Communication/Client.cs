@@ -38,7 +38,6 @@ namespace FlightSimulator.Communication
             sender.Connect(server.Settings.FlightServerIP, server.Settings.FlightInfoPort);
         }
 
-
     }
 
 
