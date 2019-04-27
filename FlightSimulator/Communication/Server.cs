@@ -41,7 +41,7 @@ namespace FlightSimulator.Communication
         public Server()
         {
             settings = new SettingsWindowViewModel(ApplicationSettingsModel.Instance);
-            listener = new TcpListener(IPAddress.Parse(settings.FlightServerIP), settings.FlightCommandPort);
+            listener = new TcpListener(IPAddress.Parse(settings.FlightServerIP), settings.FlightInfoPort);
         }
 
         public void listen()

@@ -50,7 +50,7 @@ namespace FlightSimulator.Views
             double lat = Double.Parse(fields[1]);
             double lon = Double.Parse(fields[0]);
             Point p1 = new Point(lon, lat);
-
+            planeLocations.AppendAsync(Dispatcher, p1);
         }
 
     }

@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using FlightSimulator.ViewModels.Windows;
+using FlightSimulator.Model;
 
 namespace FlightSimulator.Views.Windows
 {
@@ -19,9 +21,12 @@ namespace FlightSimulator.Views.Windows
     /// </summary>
     public partial class Settings : Window
     {
+        private SettingsWindowViewModel vm;
         public Settings()
         {
             InitializeComponent();
+            vm = new SettingsWindowViewModel(ApplicationSettingsModel.Instance);
+            this.DataContext = vm;
         }
     }
 }
