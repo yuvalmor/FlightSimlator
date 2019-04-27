@@ -12,6 +12,7 @@ using FlightSimulator.ViewModels;
 using FlightSimulator.Utils;
 using System.Windows.Input;
 using System.ComponentModel;
+using FlightSimulator.Model.Interface;
 
 namespace FlightSimulator.Communication
 {
@@ -33,14 +34,14 @@ namespace FlightSimulator.Communication
         #endregion
 
         private TcpListener listener;
-        private SettingsWindowViewModel settings;
+        private ISettingsModel settings;
 
         public SettingsWindowViewModel Settings
         { get; private set; }
 
         public Server()
         {
-            settings = new SettingsWindowViewModel(ApplicationSettingsModel.Instance);
+            settings = ApplicationSettingsModel.Instance;
             listener = new TcpListener(IPAddress.Parse(settings.FlightServerIP), settings.FlightInfoPort);
         }
 
