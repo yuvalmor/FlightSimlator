@@ -33,9 +33,15 @@ namespace FlightSimulator.Communication
 
         public void connect()
         {
+            // we open our server (details - channel info -  so the simultor connects as client)
             Server server = Server.Instance;
+
+            // here we wait for a client to arrive at the ip and infoport speceified (we needs to open simulator and run)
+            // when we run the simulator also opens it's on server
             server.listen();
-            sender.Connect(server.Settings.FlightServerIP, server.Settings.FlightInfoPort);
+
+            // here we connet as clients to the simultor server, channel command
+            sender.Connect(server.Settings.FlightServerIP, server.Settings.FlightCommandPort);
         }
 
     }

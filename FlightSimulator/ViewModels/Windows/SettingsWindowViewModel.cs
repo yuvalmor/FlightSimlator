@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace FlightSimulator.ViewModels.Windows
@@ -59,6 +60,7 @@ namespace FlightSimulator.ViewModels.Windows
             model.ReloadSettings();
         }
 
+
         #region Commands
         #region ClickCommand
         private ICommand _clickCommand;
@@ -87,9 +89,11 @@ namespace FlightSimulator.ViewModels.Windows
         private void OnCancel()
         {
             model.ReloadSettings();
+
         }
         #endregion
         #endregion
+
     }
 }
 

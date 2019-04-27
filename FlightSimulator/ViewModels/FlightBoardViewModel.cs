@@ -7,12 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using FlightSimulator.Views.Windows;
 
 namespace FlightSimulator.ViewModels
 {
     public class FlightBoardViewModel : BaseNotify
     {
-        public double Lon{get; }
+        public double Lon {get; }
         public double Lat { get; }
 
         #region Commands
@@ -45,7 +46,8 @@ namespace FlightSimulator.ViewModels
 
         private void OnSettings()
         {
-
+            Settings window = new Settings();
+            window.ShowDialog();
         }
 
         #endregion
