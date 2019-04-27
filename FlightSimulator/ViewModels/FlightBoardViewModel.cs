@@ -50,7 +50,5 @@ namespace FlightSimulator.ViewModels
 
         #endregion
         #endregion
-
-
     }
 }

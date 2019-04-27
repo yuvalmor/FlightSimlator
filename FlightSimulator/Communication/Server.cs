@@ -70,11 +70,8 @@ namespace FlightSimulator.Communication
                 {
                     str = buffer;
                 }
-
-
                 string info = System.Text.Encoding.UTF8.GetString(str, 0, str.Length);
                 NotifyPropertyChanged(info);
-                
                 Array.Clear(buffer, 0, buffer.Length);
             }
         }
