@@ -92,7 +92,6 @@ namespace FlightSimulator.ViewModels.Windows
         }
         #endregion
         #endregion
-
     }
 }
 

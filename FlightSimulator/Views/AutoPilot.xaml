@@ -3,12 +3,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:FlightSimulator.Views"
+             xmlns:converter="clr-namespace:FlightSimulator.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <converter:LengthToBackgtoundConverter x:Key="converter"/>
+    </UserControl.Resources>
     <Viewbox>
         <Grid Height="408" Width="535">
-            <TextBox HorizontalAlignment="Left" Height="320" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="525"/>
+            <TextBox Text="{Binding MyText ,UpdateSourceTrigger=PropertyChanged}" 
+                 Background="{Binding Path=MyText,UpdateSourceTrigger=PropertyChanged, Converter={StaticResource converter} }" HorizontalAlignment="Left" Height="320" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="525"/>
             <Button Content="OK" BorderThickness="3" FontWeight="Bold" HorizontalAlignment="Left" Margin="108,345,0,0" VerticalAlignment="Top" Width="114" Height="50"/>
             <Button Content="CLEAR" BorderThickness="3" FontWeight="Bold" HorizontalAlignment="Left" Margin="299,345,0,0" VerticalAlignment="Top" Width="109" Height="50"/>
         </Grid>
