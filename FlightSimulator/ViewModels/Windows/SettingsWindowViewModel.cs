@@ -60,7 +60,6 @@ namespace FlightSimulator.ViewModels.Windows
             model.ReloadSettings();
         }
 
-
         #region Commands
         #region ClickCommand
         private ICommand _clickCommand;
@@ -89,7 +88,7 @@ namespace FlightSimulator.ViewModels.Windows
         private void OnCancel()
         {
             model.ReloadSettings();
-
+            
         }
         #endregion
         #endregion
