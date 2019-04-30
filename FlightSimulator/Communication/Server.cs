@@ -35,6 +35,8 @@ namespace FlightSimulator.Communication
 
         private TcpListener listener;
         private ISettingsModel settings;
+        private Thread listenThread;
+        private TcpClient clientSocket;
 
         public SettingsWindowViewModel Settings
         { get; private set; }
@@ -49,14 +51,14 @@ namespace FlightSimulator.Communication
         {
             listener.Start();
             TcpClient client = listener.AcceptTcpClient();
-            Thread listenThread = new Thread(new ParameterizedThreadStart(readDataFromSimulator));
+            listenThread = new Thread(new ParameterizedThreadStart(readDataFromSimulator));
             listenThread.Start(client);
             // join? detach?
         }
         
         public void readDataFromSimulator(object client)
         {
-            TcpClient clientSocket = (TcpClient)client;
+            clientSocket = (TcpClient)client;
             NetworkStream stream = clientSocket.GetStream();
             int numBytes = 0;
             byte[] buffer = new byte[Consts.BUFFER_SIZE];
@@ -66,7 +68,13 @@ namespace FlightSimulator.Communication
 
             while (numBytes != -1)
             {
-                numBytes = stream.Read(buffer, 0, buffer.Length);
+                try
+                {
+                    numBytes = stream.Read(buffer, 0, buffer.Length);
+                } catch {
+                    return;
+                }
+
                 data = System.Text.Encoding.UTF8.GetString(buffer, 0, buffer.Length);
 
                 string[] filtered = data.Split('\n');
@@ -82,10 +90,14 @@ namespace FlightSimulator.Communication
                 data = "";
                  
             }
-
             
         }
 
+        public void closeStream()
+        {
+            this.clientSocket.GetStream().Dispose();
+            this.clientSocket.Close();
+        }
 
     }
 }

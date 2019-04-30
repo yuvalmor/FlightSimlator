@@ -70,8 +70,14 @@ namespace FlightSimulator.Views
             data+= " " + parser[1];
             byte[] buffer = ASCIIEncoding.ASCII.GetBytes(data);
 
-            stream.Write(buffer, 0, buffer.Length);
-       
+            try
+            {
+                stream.Write(buffer, 0, buffer.Length);
+            } catch
+            {
+                // do something
+            }
+
         }
     }
 }

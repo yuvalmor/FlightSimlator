@@ -46,10 +46,11 @@ namespace FlightSimulator.Views
 
         private void Vm_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
+            string check = e.PropertyName;
             string[] fields = e.PropertyName.Split(',');
-            double lat = Double.Parse(fields[1]);
             double lon = Double.Parse(fields[0]);
-            Point p1 = new Point(lon, lat);
+            double lat = Double.Parse(fields[1]);
+            Point p1 = new Point(lat, lon);
             planeLocations.AppendAsync(Dispatcher, p1);
         }
 
