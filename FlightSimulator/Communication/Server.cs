@@ -50,31 +50,40 @@ namespace FlightSimulator.Communication
             listener.Start();
             TcpClient client = listener.AcceptTcpClient();
             Thread listenThread = new Thread(new ParameterizedThreadStart(readDataFromSimulator));
-            listenThread.Start();
+            listenThread.Start(client);
+            // join? detach?
         }
         
         public void readDataFromSimulator(object client)
         {
-            NetworkStream stream = ((TcpClient)client).GetStream();
+            TcpClient clientSocket = (TcpClient)client;
+            NetworkStream stream = clientSocket.GetStream();
             int numBytes = 0;
             byte[] buffer = new byte[Consts.BUFFER_SIZE];
             byte[] str = new byte[Consts.BUFFER_SIZE];
+            
+            string data = "";
 
             while (numBytes != -1)
             {
-                numBytes = stream.Read(buffer, (int)stream.Length, Consts.BUFFER_SIZE);
-                if (str.Length > 0 && str != null)
+                numBytes = stream.Read(buffer, 0, buffer.Length);
+                data = System.Text.Encoding.UTF8.GetString(buffer, 0, buffer.Length);
+
+                string[] filtered = data.Split('\n');
+                foreach (string s in filtered)
                 {
-                    str = str.Concat(buffer).ToArray();
+                    if (String.IsNullOrEmpty(s) || s[0] == '\0' || s.Length == 0 || s == null)
+                    {
+                        continue;
+                    }
+                    NotifyPropertyChanged(s);
                 }
-                else
-                {
-                    str = buffer;
-                }
-                string info = System.Text.Encoding.UTF8.GetString(str, 0, str.Length);
-                NotifyPropertyChanged(info);
                 Array.Clear(buffer, 0, buffer.Length);
+                data = "";
+                 
             }
+
+            
         }
 
 

@@ -65,7 +65,6 @@ namespace FlightSimulator.Views
                     break;
                 default:
                     return;
-
             }
 
             data+= " " + parser[1];

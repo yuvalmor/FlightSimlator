@@ -40,8 +40,13 @@ namespace FlightSimulator.Communication
             // when we run the simulator also opens it's on server
             server.listen();
 
-            // here we connet as clients to the simultor server, channel command
-            sender.Connect(server.Settings.FlightServerIP, server.Settings.FlightCommandPort);
+            /*
+            while (true)
+            {
+                // here we connet as clients to the simultor server, channel command
+                sender.Connect(server.Settings.FlightServerIP, server.Settings.FlightCommandPort);
+            }
+            */
         }
 
     }

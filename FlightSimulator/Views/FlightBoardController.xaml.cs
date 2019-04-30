@@ -1,6 +1,7 @@
 ﻿using FlightSimulator.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,13 +22,14 @@ namespace FlightSimulator.Views
     /// </summary>
     public partial class FlightBoardController : UserControl
     {
-        //private FlightBoardViewModel vm;
+        private FlightBoardViewModel vm;
         public FlightBoardController()
         {
             InitializeComponent();
-            //vm = new FlightBoardViewModel();
-            //this.DataContext = vm;
-            DataContext = new FlightBoardViewModel();
+            vm = new FlightBoardViewModel();
+            this.DataContext = vm;
+
+           
         }
     }
 }

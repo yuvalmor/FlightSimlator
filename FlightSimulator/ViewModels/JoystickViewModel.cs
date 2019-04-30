@@ -14,12 +14,12 @@ namespace FlightSimulator.ViewModels
     public class JoystickViewModel : BaseNotify
     {
         private VirtualJoystickEventArgs model;
-        private string var;
+        private string info;
 
         public JoystickViewModel(VirtualJoystickEventArgs model)
         {
             this.model = model;
-            var = "";
+            info = "";
         }
 
         public double Rudder
@@ -28,9 +28,9 @@ namespace FlightSimulator.ViewModels
             set
             {
                 model.Rudder = value;
-                var = "Rudder," + model.Rudder.ToString(); 
-                NotifyPropertyChanged(var);
-                var = "";
+                info = "Rudder," + model.Rudder.ToString(); 
+                NotifyPropertyChanged(info);
+                info = "";
             }
         }
 
@@ -40,9 +40,9 @@ namespace FlightSimulator.ViewModels
             set
             {
                 model.Throttle = value;
-                var = "Throttle," + model.Throttle.ToString();
-                NotifyPropertyChanged(var);
-                var = "";
+                info = "Throttle," + model.Throttle.ToString();
+                NotifyPropertyChanged(info);
+                info = "";
             }
         }
 
@@ -52,9 +52,9 @@ namespace FlightSimulator.ViewModels
             set
             {
                 model.Elevator = value;
-                var = "Rudder," + model.Elevator.ToString();
-                NotifyPropertyChanged(var);
-                var = "";
+                info = "Rudder," + model.Elevator.ToString();
+                NotifyPropertyChanged(info);
+                info = "";
             }
         }
 
