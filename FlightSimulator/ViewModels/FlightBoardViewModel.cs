@@ -34,6 +34,9 @@ namespace FlightSimulator.ViewModels
             client.connect();
         }
 
+        #endregion
+        #region SettingsCommand
+
         private ICommand _settingsCommand;
         public ICommand SettingsCommand
         {

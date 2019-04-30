@@ -37,7 +37,7 @@
                 </Slider.RenderTransform>
             </Slider>
             <Slider Name="RudderSlider" HorizontalAlignment="Left" Margin="160,144.333,0,0" Grid.Row="1" VerticalAlignment="Top" 
-                    Height="26" Width="427" Minimum="-1" Maximum="1" TickPlacement="BottomRight" TickFrequency="0.1" IsSnapToTickEnabled="True"/>
+                    Height="26" Width="427" Minimum="-1" Maximum="1" TickPlacement="BottomRight" TickFrequency="0.1" IsSnapToTickEnabled="True" />
             <TextBox HorizontalAlignment="Left" Height="50" Margin="140,10,0,0" TextWrapping="Wrap" FontSize="29" FontWeight="Bold"
                      VerticalAlignment="Top" Width="106" Text="{Binding ElementName=ThrottleSlider, Path=Value}" BorderThickness="0" />
             <TextBox HorizontalAlignment="Left" Height="50" Margin="601,128.333,0,0" TextWrapping="Wrap" FontSize="29" FontWeight="Bold"

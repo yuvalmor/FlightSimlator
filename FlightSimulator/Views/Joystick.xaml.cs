@@ -112,7 +112,7 @@ namespace FlightSimulator.Views
         public Joystick()
         {
             InitializeComponent();
-
+            
             Knob.MouseLeftButtonDown += Knob_MouseLeftButtonDown;
             Knob.MouseLeftButtonUp += Knob_MouseLeftButtonUp;
             Knob.MouseMove += Knob_MouseMove;
@@ -137,17 +137,23 @@ namespace FlightSimulator.Views
             ///!!!!!!!!!!!!!!!!!
             /// YOU MUST CHANGE THE FUNCTION!!!!
             ///!!!!!!!!!!!!!!
-            if (!Knob.IsMouseCaptured) return;
 
-            Point newPos = e.GetPosition(Base);
+            if (!Knob.IsMouseCaptured) return; // if the mouse is not pressed - do nothing
 
-            Point deltaPos = new Point(newPos.X - _startPos.X, newPos.Y - _startPos.Y);
+            Point newPos = e.GetPosition(Base); // get the position we moved to
 
-            double distance = Math.Round(Math.Sqrt(deltaPos.X * deltaPos.X + deltaPos.Y * deltaPos.Y));
-            if (distance >= canvasWidth / 2 || distance >= canvasHeight / 2)
+            Point deltaPos = new Point(newPos.X - _startPos.X, newPos.Y - _startPos.Y); // calculate differnece in x,y
+
+            double distance = Math.Round(Math.Sqrt(deltaPos.X * deltaPos.X + deltaPos.Y * deltaPos.Y)); // distance between two points
+
+            // canvasWidth is set to be the difference between the the diameter of the big circle and the diameter of the little knob.
+            // this makes sure we do not cross the knob area.
+            if (distance >= canvasWidth / 2 || distance >= canvasHeight / 2)  
                 return;
-            Aileron = -deltaPos.Y;
-            Elevator = deltaPos.X;
+
+            // here i changed the axis
+            Aileron = deltaPos.X; 
+            Elevator = -deltaPos.Y;
 
             knobPosition.X = deltaPos.X;
             knobPosition.Y = deltaPos.Y;
