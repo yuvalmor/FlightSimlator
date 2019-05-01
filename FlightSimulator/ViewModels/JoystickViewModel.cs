@@ -8,6 +8,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using FlightSimulator.Model.EventArgs;
+using System.ComponentModel;
+using FlightSimulator.Utils;
+using static FlightSimulator.Views.Joystick;
+using FlightSimulator.Views;
 
 namespace FlightSimulator.ViewModels
 {
@@ -19,7 +23,6 @@ namespace FlightSimulator.ViewModels
         public JoystickViewModel(VirtualJoystickEventArgs model)
         {
             this.model = model;
-            info = "";
         }
 
         public double Rudder
@@ -28,9 +31,9 @@ namespace FlightSimulator.ViewModels
             set
             {
                 model.Rudder = value;
-                info = "Rudder," + model.Rudder.ToString(); 
-                NotifyPropertyChanged(info);
-                info = "";
+                //info = "Rudder," + model.Rudder.ToString(); 
+                //NotifyPropertyChanged(info);
+                //info = "";
             }
         }
 
@@ -40,9 +43,6 @@ namespace FlightSimulator.ViewModels
             set
             {
                 model.Throttle = value;
-                info = "Throttle," + model.Throttle.ToString();
-                NotifyPropertyChanged(info);
-                info = "";
             }
         }
 
@@ -52,10 +52,34 @@ namespace FlightSimulator.ViewModels
             set
             {
                 model.Elevator = value;
-                info = "Rudder," + model.Elevator.ToString();
-                NotifyPropertyChanged(info);
-                info = "";
             }
+        }
+
+        public double Aileron
+        {
+            get { return model.Aileron; }
+            set
+            {
+                model.Aileron = value;
+            }
+        }
+
+        public void Vm_JoystickPropertyChanged(Joystick sender, VirtualJoystickEventArgs e)
+        {
+
+            this.Aileron = e.Aileron;
+            this.Elevator = e.Elevator;
+
+            string aileronData = "set " + Consts.AILERON_XML + " " + this.Aileron.ToString();
+            string elevatorData = "set " + Consts.ELEVATOR_XML + " " + this.Elevator.ToString();
+
+            byte[] aileronBuffer = ASCIIEncoding.ASCII.GetBytes(aileronData);
+            byte[] elevatorBuffer = ASCIIEncoding.ASCII.GetBytes(elevatorData);
+
+            Client client = Client.Instance;
+            //client.writeDataToSimulator(aileronBuffer);
+            //client.writeDataToSimulator(elevatorBuffer);
+
         }
 
 

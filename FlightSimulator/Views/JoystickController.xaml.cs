@@ -26,12 +26,11 @@ namespace FlightSimulator.Views
     /// </summary>
     public partial class JoystickController : UserControl
     {
-        private JoystickViewModel vm;
+
         public JoystickController()
         {
             InitializeComponent();
-            vm = new JoystickViewModel(VirtualJoystickEventArgs.Instance);
-            this.DataContext = vm;
+
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
@@ -39,45 +38,27 @@ namespace FlightSimulator.Views
 
         }
 
-        private void Vm_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void ThrottleSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
+            VirtualJoystickEventArgs.Instance.Throttle = ThrottleSlider.Value;
 
-            Server server = Server.Instance;
-            TcpClient client = new TcpClient(server.Settings.FlightServerIP, server.Settings.FlightCommandPort);
-            NetworkStream stream = client.GetStream();
+            string throttleData = "set " + Consts.THROTTLE_XML + " " + ThrottleSlider.Value.ToString();
+            byte[] throttleBuffer = ASCIIEncoding.ASCII.GetBytes(throttleData);
 
-            string[] parser = e.PropertyName.Split(',');
-            string data = "set ";
+            Client client = Client.Instance;
+            //client.writeDataToSimulator(throttleBuffer);
             
-            switch (parser[0])
-            {
-                case "Rudder":
-                    data += Consts.RUDDER_XML;
-                    break;
-                case "Throttle":
-                    data += Consts.THROTTLE_XML;
-                    break;
-                case "Aileron":
-                    data += Consts.AILERON_XML;
-                    break;
-                case "Elevator":
-                    data += Consts.ELEVATOR_XML;
-                    break;
-                default:
-                    return;
-            }
+        }
 
-            data+= " " + parser[1];
-            byte[] buffer = ASCIIEncoding.ASCII.GetBytes(data);
+        private void RudderSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            VirtualJoystickEventArgs.Instance.Throttle = RudderSlider.Value;
 
-            try
-            {
-                stream.Write(buffer, 0, buffer.Length);
-            } catch
-            {
-                // do something
-            }
+            string rudderData = "set " + Consts.RUDDER_XML + " " + RudderSlider.Value.ToString();
+            byte[] rudderBuffer = ASCIIEncoding.ASCII.GetBytes(rudderData);
 
+            Client client = Client.Instance;
+            //client.writeDataToSimulator(rudderBuffer);
         }
     }
 }
