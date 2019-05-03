@@ -10,6 +10,7 @@ namespace FlightSimulator.ViewModels
 {
     class AutoPilotViewModel : BaseNotify
     {
+        private int length; 
         private string textCommand;
         public string TextCommand
         {
@@ -20,7 +21,18 @@ namespace FlightSimulator.ViewModels
                 {
                     textCommand = value;
                     NotifyPropertyChanged("textCommand");
+                    Length = textCommand.Length;
                 }
+            }
+        }
+
+        public int Length
+        {
+            get => length;
+            set
+            {
+                length = value;
+                NotifyPropertyChanged("length");
             }
         }
         private ICommand _clearCommand;
@@ -35,5 +47,20 @@ namespace FlightSimulator.ViewModels
         {
             TextCommand = "";
         }
+
+        private ICommand _okCommand;
+        public ICommand OKCommand
+        {
+            get
+            {
+                return _okCommand ?? (_okCommand = new CommandHandler(() => SendCommands()));
+            }
+        }
+
+        private void SendCommands()
+        {
+            Length = 0;
+        }
+
     }
 }
