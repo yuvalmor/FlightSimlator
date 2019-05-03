@@ -40,8 +40,32 @@ namespace FlightSimulator.Communication
             // when we run the simulator also opens it's on server
             server.listen();
 
+
             // here we connet as clients to the simultor server, channel command
             sender.Connect(server.Settings.FlightServerIP, server.Settings.FlightCommandPort);
+
+            /*
+            while (true)
+            {   }
+            */
+        }
+
+        public void writeDataToSimulator(byte[] data)
+        {
+            Server server = Server.Instance;
+            TcpClient client = new TcpClient(server.Settings.FlightServerIP, server.Settings.FlightCommandPort);
+            NetworkStream stream = client.GetStream();
+
+            try
+            {
+                stream.Write(data, 0, data.Length);
+                stream.Write(data, 0, data.Length);
+            }
+            catch
+            {
+                // do something
+            }
+
         }
 
     }

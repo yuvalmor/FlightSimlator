@@ -31,14 +31,14 @@ namespace FlightSimulator.Model
         }
         public int FlightCommandPort
         {
-            get { return Properties.Settings.Default.FlightCommandPort; }
-            set { Properties.Settings.Default.FlightCommandPort = value; }
+            get { return int.Parse(Properties.Settings.Default.FlightCommandPort); }
+            set { Properties.Settings.Default.FlightCommandPort = value.ToString(); }
         }
 
         public int FlightInfoPort
         {
-            get { return Properties.Settings.Default.FlightInfoPort; }
-            set { Properties.Settings.Default.FlightInfoPort = value; }
+            get { return int.Parse(Properties.Settings.Default.FlightInfoPort); }
+            set { Properties.Settings.Default.FlightInfoPort = value.ToString(); }
         }
 
         public void SaveSettings()
@@ -48,6 +48,7 @@ namespace FlightSimulator.Model
 
         public void ReloadSettings()
         {
+
             Properties.Settings.Default.Reload();
         }
     }

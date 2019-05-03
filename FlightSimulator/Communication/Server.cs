@@ -35,6 +35,8 @@ namespace FlightSimulator.Communication
 
         private TcpListener listener;
         private ISettingsModel settings;
+        private Thread listenThread;
+        private TcpClient clientSocket;
 
         public SettingsWindowViewModel Settings
         { get; private set; }
@@ -49,34 +51,53 @@ namespace FlightSimulator.Communication
         {
             listener.Start();
             TcpClient client = listener.AcceptTcpClient();
-            Thread listenThread = new Thread(new ParameterizedThreadStart(readDataFromSimulator));
-            listenThread.Start();
+            listenThread = new Thread(new ParameterizedThreadStart(readDataFromSimulator));
+            listenThread.Start(client);
+            // join? detach?
         }
         
         public void readDataFromSimulator(object client)
         {
-            NetworkStream stream = ((TcpClient)client).GetStream();
+            clientSocket = (TcpClient)client;
+            NetworkStream stream = clientSocket.GetStream();
             int numBytes = 0;
             byte[] buffer = new byte[Consts.BUFFER_SIZE];
             byte[] str = new byte[Consts.BUFFER_SIZE];
+            
+            string data = "";
 
             while (numBytes != -1)
             {
-                numBytes = stream.Read(buffer, (int)stream.Length, Consts.BUFFER_SIZE);
-                if (str.Length > 0 && str != null)
+                try
                 {
-                    str = str.Concat(buffer).ToArray();
+                    numBytes = stream.Read(buffer, 0, buffer.Length);
+                } catch {
+                    return;
                 }
-                else
+
+                data = System.Text.Encoding.UTF8.GetString(buffer, 0, buffer.Length);
+
+                string[] filtered = data.Split('\n');
+                foreach (string s in filtered)
                 {
-                    str = buffer;
+                    if (String.IsNullOrEmpty(s) || s[0] == '\0' || s.Length == 0 || s == null)
+                    {
+                        continue;
+                    }
+                    NotifyPropertyChanged(s);
                 }
-                string info = System.Text.Encoding.UTF8.GetString(str, 0, str.Length);
-                NotifyPropertyChanged(info);
                 Array.Clear(buffer, 0, buffer.Length);
+                data = "";
+                 
             }
+            
         }
 
+        public void closeStream()
+        {
+            this.clientSocket.GetStream().Dispose();
+            this.clientSocket.Close();
+        }
 
     }
 }

@@ -88,7 +88,7 @@ namespace FlightSimulator.ViewModels.Windows
         private void OnCancel()
         {
             model.ReloadSettings();
-
+            
         }
         #endregion
         #endregion

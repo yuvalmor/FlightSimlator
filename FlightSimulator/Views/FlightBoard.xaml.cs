@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using FlightSimulator.Communication;
 using FlightSimulator.Model;
 using FlightSimulator.ViewModels;
 using Microsoft.Research.DynamicDataDisplay;
@@ -30,6 +31,9 @@ namespace FlightSimulator.Views
         public FlightBoard()
         {
             InitializeComponent();
+
+            Server server = Server.Instance;
+            server.PropertyChanged += this.Vm_PropertyChanged;
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
@@ -42,10 +46,11 @@ namespace FlightSimulator.Views
 
         private void Vm_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
+            string check = e.PropertyName;
             string[] fields = e.PropertyName.Split(',');
-            double lat = Double.Parse(fields[1]);
             double lon = Double.Parse(fields[0]);
-            Point p1 = new Point(lon, lat);
+            double lat = Double.Parse(fields[1]);
+            Point p1 = new Point(lat, lon);
             planeLocations.AppendAsync(Dispatcher, p1);
         }
 

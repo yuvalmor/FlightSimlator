@@ -34,6 +34,9 @@ namespace FlightSimulator.ViewModels
             client.connect();
         }
 
+        #endregion
+        #region SettingsCommand
+
         private ICommand _settingsCommand;
         public ICommand SettingsCommand
         {
@@ -51,6 +54,30 @@ namespace FlightSimulator.ViewModels
         }
 
         #endregion
+        #region DisConnectCommand
+
+        private ICommand _disconnectCommand;
+        public ICommand DisConnectCommand
+        {
+            set { }
+            get
+            {
+                return _disconnectCommand ?? (_disconnectCommand = new CommandHandler(() => OnDisConnect()));
+            }
+        }
+
+        private void OnDisConnect()
+        {
+            Server server = Server.Instance;
+            server.closeStream();
+            // ANYTHING ELSE?
+
+        }
+
+        #endregion
+
+
+
         #endregion
     }
 }

@@ -22,7 +22,7 @@ namespace FlightSimulator.Views.Windows
     /// </summary>
     public partial class Settings : Window
     {
-        //private SettingsWindowViewModel vm;
+        private SettingsWindowViewModel vm;
         public Settings()
         {
             InitializeComponent();

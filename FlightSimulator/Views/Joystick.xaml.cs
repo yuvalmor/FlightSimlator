@@ -1,6 +1,8 @@
 ﻿using FlightSimulator.Model.EventArgs;
+using FlightSimulator.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -47,14 +49,21 @@ namespace FlightSimulator.Views
         public double Aileron
         {
             get { return Convert.ToDouble(GetValue(AileronProperty)); }
-            set { SetValue(AileronProperty, value); }
+            set
+            {
+                SetValue(AileronProperty, value);
+            }
         }
 
         /// <summary>current Elevator (or "power"), from 0 to 100</summary>
         public double Elevator
         {
             get { return Convert.ToDouble(GetValue(ElevatorProperty)); }
-            set { SetValue(ElevatorProperty, value); }
+            set
+            {
+                SetValue(ElevatorProperty, value);
+
+            }
         }
 
         /// <summary>How often should be raised StickMove event in degrees</summary>
@@ -90,7 +99,7 @@ namespace FlightSimulator.Views
         /// <param name="sender">The object that fired the event</param>
         /// <param name="args">Holds new values for Aileron and Elevator</param>
         public delegate void OnScreenJoystickEventHandler(Joystick sender, VirtualJoystickEventArgs args);
-
+       
         /// <summary>Delegate for joystick events that hold no data</summary>
         /// <param name="sender">The object that fired the event</param>
         public delegate void EmptyJoystickEventHandler(Joystick sender);
@@ -109,16 +118,23 @@ namespace FlightSimulator.Views
         private double canvasWidth, canvasHeight;
         private readonly Storyboard centerKnob;
 
+        private JoystickViewModel vm;
+
         public Joystick()
         {
             InitializeComponent();
-
+            
             Knob.MouseLeftButtonDown += Knob_MouseLeftButtonDown;
             Knob.MouseLeftButtonUp += Knob_MouseLeftButtonUp;
             Knob.MouseMove += Knob_MouseMove;
 
             centerKnob = Knob.Resources["CenterKnob"] as Storyboard;
-        }
+
+            vm = new JoystickViewModel(VirtualJoystickEventArgs.Instance);
+            this.DataContext = vm;
+            Moved += new OnScreenJoystickEventHandler(vm.Vm_JoystickPropertyChanged);
+                
+          }
 
         private void Knob_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -137,17 +153,25 @@ namespace FlightSimulator.Views
             ///!!!!!!!!!!!!!!!!!
             /// YOU MUST CHANGE THE FUNCTION!!!!
             ///!!!!!!!!!!!!!!
-            if (!Knob.IsMouseCaptured) return;
 
-            Point newPos = e.GetPosition(Base);
+            if (!Knob.IsMouseCaptured) return; // if the mouse is not pressed - do nothing
 
-            Point deltaPos = new Point(newPos.X - _startPos.X, newPos.Y - _startPos.Y);
+            Point newPos = e.GetPosition(Base); // get the position we moved to
 
-            double distance = Math.Round(Math.Sqrt(deltaPos.X * deltaPos.X + deltaPos.Y * deltaPos.Y));
-            if (distance >= canvasWidth / 2 || distance >= canvasHeight / 2)
+            Point deltaPos = new Point(newPos.X - _startPos.X, newPos.Y - _startPos.Y); // calculate differnece in x,y
+
+            double distance = Math.Round(Math.Sqrt(deltaPos.X * deltaPos.X + deltaPos.Y * deltaPos.Y)); // distance between two points
+
+            // canvasWidth is set to be the difference between the the diameter of the big circle and the diameter of the little knob.
+            // this makes sure we do not cross the knob area.
+            if (distance >= canvasWidth / 2 || distance >= canvasHeight / 2)  
                 return;
-            Aileron = -deltaPos.Y;
-            Elevator = deltaPos.X;
+
+            // here i changed the axis
+            //Aileron = deltaPos.X / (canvasWidth / 2);
+            //Elevator = -deltaPos.Y / (canvasWidth / 2);
+            Aileron = deltaPos.X;
+            Elevator = -deltaPos.Y;
 
             knobPosition.X = deltaPos.X;
             knobPosition.Y = deltaPos.Y;
