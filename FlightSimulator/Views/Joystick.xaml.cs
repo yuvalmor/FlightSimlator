@@ -130,9 +130,9 @@ namespace FlightSimulator.Views
 
             centerKnob = Knob.Resources["CenterKnob"] as Storyboard;
 
-            vm = new JoystickViewModel(VirtualJoystickEventArgs.Instance);
+           /* vm = new JoystickViewModel(VirtualJoystickEventArgs.Instance);
             this.DataContext = vm;
-            Moved += new OnScreenJoystickEventHandler(vm.Vm_JoystickPropertyChanged);
+            Moved += new OnScreenJoystickEventHandler(vm.Vm_JoystickPropertyChanged);*/
                 
           }
 
