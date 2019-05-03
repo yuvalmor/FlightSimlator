@@ -18,6 +18,7 @@ using System.ComponentModel;
 using FlightSimulator.Communication;
 using System.Net.Sockets;
 using FlightSimulator.Utils;
+using FlightSimulator.Views.Windows;
 
 namespace FlightSimulator.Views
 {
@@ -27,11 +28,20 @@ namespace FlightSimulator.Views
     public partial class JoystickController : UserControl
     {
 
+        private JoystickViewModel vm;
+
         public JoystickController()
         {
             InitializeComponent();
+            
+            vm = new JoystickViewModel(VirtualJoystickEventArgs.Instance);
+            this.DataContext = vm;
 
+
+            Joystick.Move += new Joystick.OnScreenJoystickEventHandler(this.Vm_JoystickPropertyChanged);
+            
         }
+       
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
@@ -60,5 +70,23 @@ namespace FlightSimulator.Views
             Client client = Client.Instance;
             //client.writeDataToSimulator(rudderBuffer);
         }
+
+
+        public void Vm_JoystickPropertyChanged(Joystick sender, VirtualJoystickEventArgs e)
+        {
+            this.vm.Aileron = e.Aileron;
+            this.vm.Elevator = e.Elevator;
+
+            string aileronData = "set " + Consts.AILERON_XML + " " + this.vm.Aileron.ToString();
+            string elevatorData = "set " + Consts.ELEVATOR_XML + " " + this.vm.Elevator.ToString();
+
+            byte[] aileronBuffer = ASCIIEncoding.ASCII.GetBytes(aileronData);
+            byte[] elevatorBuffer = ASCIIEncoding.ASCII.GetBytes(elevatorData);
+
+            Client client = Client.Instance;
+            //client.writeDataToSimulator(aileronBuffer);
+            //client.writeDataToSimulator(elevatorBuffer);
+        }
+
     }
 }

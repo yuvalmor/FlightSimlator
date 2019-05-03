@@ -1,4 +1,6 @@
-﻿using FlightSimulator.Model.EventArgs;
+﻿using FlightSimulator.Communication;
+using FlightSimulator.Model.EventArgs;
+using FlightSimulator.Utils;
 using FlightSimulator.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -16,6 +18,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using FlightSimulator.Views.Windows;
 
 namespace FlightSimulator.Views
 {
@@ -117,9 +120,7 @@ namespace FlightSimulator.Views
         private double _prevAileron, _prevElevator;
         private double canvasWidth, canvasHeight;
         private readonly Storyboard centerKnob;
-
-        private JoystickViewModel vm;
-
+        
         public Joystick()
         {
             InitializeComponent();
@@ -129,12 +130,8 @@ namespace FlightSimulator.Views
             Knob.MouseMove += Knob_MouseMove;
 
             centerKnob = Knob.Resources["CenterKnob"] as Storyboard;
+        }
 
-           /* vm = new JoystickViewModel(VirtualJoystickEventArgs.Instance);
-            this.DataContext = vm;
-            Moved += new OnScreenJoystickEventHandler(vm.Vm_JoystickPropertyChanged);*/
-                
-          }
 
         private void Knob_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -175,7 +172,7 @@ namespace FlightSimulator.Views
 
             knobPosition.X = deltaPos.X;
             knobPosition.Y = deltaPos.Y;
-
+                       
             if (Moved == null ||
                 (!(Math.Abs(_prevAileron - Aileron) > AileronStep) && !(Math.Abs(_prevElevator - Elevator) > ElevatorStep)))
                 return;
