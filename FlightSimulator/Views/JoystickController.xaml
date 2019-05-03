@@ -44,7 +44,7 @@
                 VerticalAlignment="Top" Width="106" Text="{Binding Value, ElementName=RudderSlider}" BorderThickness="0" Grid.Row="1" />
             <Image Source="/FlightSimulator;component/Photos/ailron.png"  HorizontalAlignment="Left" Height="53" Margin="267,10,0,0" VerticalAlignment="Top" Width="220"/>
             <TextBox HorizontalAlignment="Left" Height="50" Margin="527,10,0,0" TextWrapping="Wrap" FontSize="29" FontWeight="Bold"
-                VerticalAlignment="Top" Width="99" Text="{Binding UpdateSourceTrigger=PropertyChanged, ElementName=Joystick, Path=Aileron}" BorderThickness="0" />
+                VerticalAlignment="Top" Width="99" Text="{Binding Path=Aileron, Mode=TwoWay}" BorderThickness="0" />
             <Image Source="/FlightSimulator;component/Photos/elevator.png"  HorizontalAlignment="Left" Height="70" Margin="512,255,0,0" VerticalAlignment="Top" Width="235" RenderTransformOrigin="0.5,0.5">
                 <Image.RenderTransform>
                     <TransformGroup>
@@ -56,7 +56,7 @@
                 </Image.RenderTransform>
             </Image>
             <TextBox HorizontalAlignment="Left" Height="50" Margin="573,77,0,0" TextWrapping="Wrap" FontSize="29" FontWeight="Bold"
-                VerticalAlignment="Top" Width="106" Text="{Binding UpdateSourceTrigger=PropertyChanged, ElementName=Joystick, Path=Elevator}"  BorderThickness="0" RenderTransformOrigin="0.5,0.5" >
+                VerticalAlignment="Top" Width="106" Text="{Binding Path=Elevator,Mode=OneWay}"  BorderThickness="0" RenderTransformOrigin="0.5,0.5" >
                 <TextBox.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>

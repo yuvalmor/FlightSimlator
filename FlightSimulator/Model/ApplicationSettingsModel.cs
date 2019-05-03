@@ -48,7 +48,6 @@ namespace FlightSimulator.Model
 
         public void ReloadSettings()
         {
-
             Properties.Settings.Default.Reload();
         }
     }
