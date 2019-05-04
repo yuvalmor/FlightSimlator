@@ -27,66 +27,10 @@ namespace FlightSimulator.Views
     /// </summary>
     public partial class JoystickController : UserControl
     {
-
-        private JoystickViewModel vm;
-
         public JoystickController()
         {
             InitializeComponent();
-            vm = new JoystickViewModel(VirtualJoystickEventArgs.Instance);
-            this.DataContext = vm;
-
-
-            Joystick. += new Joystick.OnScreenJoystickEventHandler(this.Vm_JoystickPropertyChanged);
-            
+            DataContext = new JoystickViewModel();
         }
-       
-
-        private void UserControl_Loaded(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void ThrottleSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-            VirtualJoystickEventArgs.Instance.Throttle = ThrottleSlider.Value;
-
-            string throttleData = "set " + Consts.THROTTLE_XML + " " + ThrottleSlider.Value.ToString();
-            byte[] throttleBuffer = ASCIIEncoding.ASCII.GetBytes(throttleData);
-
-            Client client = Client.Instance;
-            //client.writeDataToSimulator(throttleBuffer);
-            
-        }
-
-        private void RudderSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-            VirtualJoystickEventArgs.Instance.Throttle = RudderSlider.Value;
-
-            string rudderData = "set " + Consts.RUDDER_XML + " " + RudderSlider.Value.ToString();
-            byte[] rudderBuffer = ASCIIEncoding.ASCII.GetBytes(rudderData);
-
-            Client client = Client.Instance;
-            //client.writeDataToSimulator(rudderBuffer);
-        }
-
-
-        public void Vm_JoystickPropertyChanged(Joystick sender, VirtualJoystickEventArgs e)
-        {
-            
-            this.vm.Aileron = e.Aileron;
-            this.vm.Elevator = e.Elevator;
-
-            string aileronData = "set " + Consts.AILERON_XML + " " + this.vm.Aileron.ToString();
-            string elevatorData = "set " + Consts.ELEVATOR_XML + " " + this.vm.Elevator.ToString();
-
-            byte[] aileronBuffer = ASCIIEncoding.ASCII.GetBytes(aileronData);
-            byte[] elevatorBuffer = ASCIIEncoding.ASCII.GetBytes(elevatorData);
-
-            Client client = Client.Instance;
-            //client.writeDataToSimulator(aileronBuffer);
-            //client.writeDataToSimulator(elevatorBuffer);
-        }
-
     }
 }

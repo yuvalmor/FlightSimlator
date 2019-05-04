@@ -6,14 +6,13 @@
              xmlns:local="clr-namespace:FlightSimulator.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-
     <Viewbox>
         <Grid Width="800">
             <Grid.RowDefinitions>
                 <RowDefinition Height="181*"/>
                 <RowDefinition Height="138*"/>
             </Grid.RowDefinitions>
-            <local:Joystick Margin="48,100,93,160" Grid.RowSpan="2"></local:Joystick>
+            <local:Joystick x:Name="joystick" Elevator="{Binding Elevator, Mode=OneWayToSource}" Aileron="{Binding Aileron,Mode=OneWayToSource}" Margin="48,100,93,160" Grid.RowSpan="2"></local:Joystick>
             <Image Source="/FlightSimulator;component/Photos/throttle.png" HorizontalAlignment="Left" Height="51" Margin="-13,258,0,0" VerticalAlignment="Top" Width="218" RenderTransformOrigin="0.5,0.5">
                 <Image.RenderTransform>
                     <TransformGroup>
@@ -25,7 +24,7 @@
                 </Image.RenderTransform>
             </Image>
             <Image Source="/FlightSimulator;component/Photos/rudder.png" Margin="267,187.667,313,30" Grid.Row="1"/>
-            <Slider Name="ThrottleSlider" ValueChanged="ThrottleSlider_ValueChanged" HorizontalAlignment="Left" Margin="-11,254,0,0" VerticalAlignment="Top"  Height="33" Width="344"
+            <Slider Name="ThrottleSlider" Value="{Binding Throttle, Mode=OneWayToSource}" HorizontalAlignment="Left" Margin="-11,254,0,0" VerticalAlignment="Top"  Height="33" Width="344"
                     RenderTransformOrigin="0.5,0.5" IsSnapToTickEnabled="True" Maximum="1" Minimum="-1" TickPlacement="BottomRight" TickFrequency="0.1" >
                 <Slider.RenderTransform>
                     <TransformGroup>
@@ -36,15 +35,15 @@
                     </TransformGroup>
                 </Slider.RenderTransform>
             </Slider>
-            <Slider Name="RudderSlider" ValueChanged="RudderSlider_ValueChanged" HorizontalAlignment="Left" Margin="160,144.333,0,0" Grid.Row="1" VerticalAlignment="Top" 
+            <Slider Name="RudderSlider" Value="{Binding Rudder, Mode=OneWayToSource}" HorizontalAlignment="Left" Margin="160,144.333,0,0" Grid.Row="1" VerticalAlignment="Top" 
                     Height="26" Width="427" Minimum="-1" Maximum="1" TickPlacement="BottomRight" TickFrequency="0.1" IsSnapToTickEnabled="True" />
             <TextBox HorizontalAlignment="Left" Height="50" Margin="140,10,0,0" TextWrapping="Wrap" FontSize="29" FontWeight="Bold"
                      VerticalAlignment="Top" Width="106" Text="{Binding ElementName=ThrottleSlider, Path=Value}" BorderThickness="0" />
             <TextBox HorizontalAlignment="Left" Height="50" Margin="601,128.333,0,0" TextWrapping="Wrap" FontSize="29" FontWeight="Bold"
                 VerticalAlignment="Top" Width="106" Text="{Binding Value, ElementName=RudderSlider}" BorderThickness="0" Grid.Row="1" />
             <Image Source="/FlightSimulator;component/Photos/ailron.png"  HorizontalAlignment="Left" Height="53" Margin="267,10,0,0" VerticalAlignment="Top" Width="220"/>
-            <TextBox HorizontalAlignment="Left" Height="50" Margin="527,10,0,0" TextWrapping="Wrap" FontSize="29" FontWeight="Bold"
-                VerticalAlignment="Top" Width="99" Text="{Binding Path=Aileron, Mode=TwoWay}" BorderThickness="0" />
+            <TextBox Text="{Binding ElementName=joystick, Path=Aileron, StringFormat={}{0:F1}}" HorizontalAlignment="Left" Height="50" Margin="527,10,0,0" TextWrapping="Wrap" FontSize="29" FontWeight="Bold"
+                VerticalAlignment="Top" Width="99" BorderThickness="0" />
             <Image Source="/FlightSimulator;component/Photos/elevator.png"  HorizontalAlignment="Left" Height="70" Margin="512,255,0,0" VerticalAlignment="Top" Width="235" RenderTransformOrigin="0.5,0.5">
                 <Image.RenderTransform>
                     <TransformGroup>
@@ -55,8 +54,8 @@
                     </TransformGroup>
                 </Image.RenderTransform>
             </Image>
-            <TextBox HorizontalAlignment="Left" Height="50" Margin="573,77,0,0" TextWrapping="Wrap" FontSize="29" FontWeight="Bold"
-                VerticalAlignment="Top" Width="106" Text="{Binding Path=Elevator,Mode=OneWay}"  BorderThickness="0" RenderTransformOrigin="0.5,0.5" >
+            <TextBox Text="{Binding ElementName=joystick, Path=Elevator, StringFormat={}{0:F1}}" TextWrapping="Wrap" FontSize="29" FontWeight="Bold"
+                HorizontalAlignment="Left" Height="50" Margin="573,77,0,0" VerticalAlignment="Top" Width="106" BorderThickness="0" RenderTransformOrigin="0.5,0.5">
                 <TextBox.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>

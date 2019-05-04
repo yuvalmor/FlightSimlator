@@ -10,57 +10,38 @@ using System.Windows.Input;
 using FlightSimulator.Model.EventArgs;
 using System.ComponentModel;
 using FlightSimulator.Utils;
-using static FlightSimulator.Views.Joystick;
 using FlightSimulator.Views;
 
 namespace FlightSimulator.ViewModels
 {
-    public class JoystickViewModel : BaseNotify
+    public class JoystickViewModel
     {
-        
-        private VirtualJoystickEventArgs model;
-
-        public JoystickViewModel(VirtualJoystickEventArgs model)
-        {
-            this.model = model;
-        }
-
-        public double Rudder
-        {
-            get { return model.Rudder; }
-            set
-            {
-                model.Rudder = value;
+        private double rudder;
+        public double Rudder{
+            set {
+                rudder = value;
             }
         }
-
-        public double Throttle
-        {
-            get { return model.Throttle; }
+        private double throttle;
+        public double Throttle {
             set
             {
-                model.Throttle = value;
+                throttle = value;
             }
         }
-
-        public double Elevator
-        {
-            get { return model.Elevator; }
+        private double elevator;
+        public double Elevator {
             set
             {
-                model.Elevator = value;
+                elevator = value;
             }
         }
-
-        public double Aileron
-        {
-            get { return model.Aileron; }
+        private double aileron;
+        public double Aileron {
             set
             {
-                model.Aileron = value;
+                aileron = value;
             }
         }
-        
-
     }
 }

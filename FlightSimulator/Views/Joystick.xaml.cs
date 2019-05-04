@@ -65,7 +65,6 @@ namespace FlightSimulator.Views
             set
             {
                 SetValue(ElevatorProperty, value);
-
             }
         }
 
