@@ -164,10 +164,10 @@ namespace FlightSimulator.Views
                 return;
 
             // here i changed the axis
-            //Aileron = deltaPos.X / (canvasWidth / 2);
-            //Elevator = -deltaPos.Y / (canvasWidth / 2);
-            Aileron = deltaPos.X;
-            Elevator = -deltaPos.Y;
+            Aileron = deltaPos.X / (canvasWidth / 2);
+            Elevator = -deltaPos.Y / (canvasWidth / 2);
+            //Aileron = deltaPos.X;
+            //Elevator = -deltaPos.Y;
 
             knobPosition.X = deltaPos.X;
             knobPosition.Y = deltaPos.Y;

@@ -25,7 +25,7 @@
             </Image>
             <Image Source="/FlightSimulator;component/Photos/rudder.png" Margin="267,187.667,313,30" Grid.Row="1"/>
             <Slider Name="ThrottleSlider" Value="{Binding Throttle, Mode=OneWayToSource}" HorizontalAlignment="Left" Margin="-11,254,0,0" VerticalAlignment="Top"  Height="33" Width="344"
-                    RenderTransformOrigin="0.5,0.5" IsSnapToTickEnabled="True" Maximum="1" Minimum="-1" TickPlacement="BottomRight" TickFrequency="0.1" >
+                    RenderTransformOrigin="0.5,0.5" IsSnapToTickEnabled="True" Maximum="1" Minimum="0" TickPlacement="BottomRight" TickFrequency="0.1" >
                 <Slider.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
