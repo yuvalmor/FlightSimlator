@@ -172,7 +172,8 @@ namespace FlightSimulator.Views
 
             knobPosition.X = deltaPos.X;
             knobPosition.Y = deltaPos.Y;
-                       
+
+           
             if (Moved == null ||
                 (!(Math.Abs(_prevAileron - Aileron) > AileronStep) && !(Math.Abs(_prevElevator - Elevator) > ElevatorStep)))
                 return;
@@ -194,5 +195,6 @@ namespace FlightSimulator.Views
             Aileron = Elevator = _prevAileron = _prevElevator = 0;
             Released?.Invoke(this);
         }
+
     }
 }

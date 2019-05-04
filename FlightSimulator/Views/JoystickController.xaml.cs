@@ -33,12 +33,11 @@ namespace FlightSimulator.Views
         public JoystickController()
         {
             InitializeComponent();
-            
             vm = new JoystickViewModel(VirtualJoystickEventArgs.Instance);
             this.DataContext = vm;
 
 
-            Joystick.Move += new Joystick.OnScreenJoystickEventHandler(this.Vm_JoystickPropertyChanged);
+            Joystick. += new Joystick.OnScreenJoystickEventHandler(this.Vm_JoystickPropertyChanged);
             
         }
        
@@ -74,6 +73,7 @@ namespace FlightSimulator.Views
 
         public void Vm_JoystickPropertyChanged(Joystick sender, VirtualJoystickEventArgs e)
         {
+            
             this.vm.Aileron = e.Aileron;
             this.vm.Elevator = e.Elevator;
 
