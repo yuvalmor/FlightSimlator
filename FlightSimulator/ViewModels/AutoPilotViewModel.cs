@@ -1,8 +1,10 @@
-﻿using FlightSimulator.Model;
+﻿using FlightSimulator.Communication;
+using FlightSimulator.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
@@ -57,10 +59,27 @@ namespace FlightSimulator.ViewModels
             }
         }
 
+
+        private void AutoPilot()
+        {
+            Client client = Client.Instance;
+            string[] lines = textCommand.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
+            for (int i = 0; i < lines.Length; i++)
+            {
+                if (lines[i] != "")
+                {
+                    lines[i] += "\r\n";
+                    client.writeDataToSimulator(lines[i]);
+                    Thread.Sleep(2000);
+                }
+            }
+        }
+
         private void SendCommands()
         {
             Length = 0;
+            Thread thread = new Thread(AutoPilot);
+            thread.Start();
         }
-
     }
 }

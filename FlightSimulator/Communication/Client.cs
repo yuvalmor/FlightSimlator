@@ -59,7 +59,6 @@ namespace FlightSimulator.Communication
 
         public void writeDataToSimulator(string data)
         {
-            
             try
             {
                 ASCIIEncoding asen = new ASCIIEncoding();
@@ -73,9 +72,5 @@ namespace FlightSimulator.Communication
             }
 
         }
-
     }
-
-
-
 }
