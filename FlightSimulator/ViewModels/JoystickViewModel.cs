@@ -18,30 +18,115 @@ namespace FlightSimulator.ViewModels
     {
         private double rudder;
         public double Rudder{
+            private get
+            {
+                return rudder;
+            }
             set {
-                rudder = value;
+
+                double newRudder = value;
+                if (newRudder - rudder > 0)
+                {
+                    rudder = newRudder;
+                    NotifyPropertyChanged("Rudder");
+                }
+                else
+                {
+                    rudder = value;
+                }
             }
         }
         private double throttle;
         public double Throttle {
+            private get
+            {
+                return throttle;
+            }
             set
             {
-                throttle = value;
+                double newThrottle = value;
+                if (newThrottle - throttle > 0)
+                {
+                    throttle = newThrottle;
+                    NotifyPropertyChanged("Throttle");
+                }
+                else
+                {
+                    throttle = value;
+                }
             }
         }
         private double elevator;
         public double Elevator {
+            private get
+            {
+                return elevator;
+            }
             set
             {
-                elevator = value;
+                double newElevator = value;
+                if (newElevator - elevator > 0)
+                {
+                    elevator = newElevator;
+                    NotifyPropertyChanged("Elevator");
+                }
+                else
+                {
+                    elevator = value;
+                }
             }
         }
         private double aileron;
         public double Aileron {
+            private get
+            {
+                return aileron;
+            }
             set
             {
-                aileron = value;
+                double newAileron = value;
+                if (newAileron - aileron > 0)
+                {
+                    aileron = newAileron;
+                    NotifyPropertyChanged("Aileron");
+                }
+                else
+                {
+                    aileron = value;
+                }
             }
         }
+        
+        public void NotifyPropertyChanged(string propName)
+        {
+
+            string data = "set ";
+
+            switch (propName)
+            {
+                case "Rudder":
+                    data += Consts.RUDDER_XML + " " + this.Rudder.ToString() + Consts.NEW_LINE;
+                    break;
+                case "Elevator":
+                    data += Consts.ELEVATOR_XML + " " + this.Elevator.ToString() + Consts.NEW_LINE;
+                    break;
+                case "Aileron":
+                    data += Consts.AILERON_XML + " " + this.Aileron.ToString() + Consts.NEW_LINE;
+                    break;
+                case "Throttle":
+                    data += Consts.THROTTLE_XML + " " + this.Throttle.ToString() + Consts.NEW_LINE;
+                    break;
+                default:
+                    return;
+
+
+            }
+
+            Client client = Client.Instance;
+            client.writeDataToSimulator(data);
+            
+        }
+
+
     }
 }

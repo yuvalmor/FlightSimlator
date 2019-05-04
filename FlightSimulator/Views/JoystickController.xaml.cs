@@ -31,6 +31,11 @@ namespace FlightSimulator.Views
         {
             InitializeComponent();
             DataContext = new JoystickViewModel();
+
         }
+
+
+
+
     }
 }

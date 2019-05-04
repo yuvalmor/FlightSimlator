@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
+using FlightSimulator.Model;
 
 namespace FlightSimulator.Communication
 {
@@ -40,30 +41,35 @@ namespace FlightSimulator.Communication
             // when we run the simulator also opens it's on server
             server.listen();
 
-
             // here we connet as clients to the simultor server, channel command
-            sender.Connect(server.Settings.FlightServerIP, server.Settings.FlightCommandPort);
-
-            /*
+            
             while (true)
-            {   }
-            */
+            {
+                try
+                {
+                    sender.Connect(ApplicationSettingsModel.Instance.FlightServerIP, ApplicationSettingsModel.Instance.FlightCommandPort);
+                    break;
+                } catch
+                {
+                    continue;
+                }
+            }
+            
         }
 
-        public void writeDataToSimulator(byte[] data)
+        public void writeDataToSimulator(string data)
         {
-            Server server = Server.Instance;
-            TcpClient client = new TcpClient(server.Settings.FlightServerIP, server.Settings.FlightCommandPort);
-            NetworkStream stream = client.GetStream();
-
+            
             try
             {
-                stream.Write(data, 0, data.Length);
-                stream.Write(data, 0, data.Length);
+                ASCIIEncoding asen = new ASCIIEncoding();
+                byte[] buffer = asen.GetBytes(data);
+                NetworkStream stream = sender.GetStream();
+                stream.Write(buffer, 0, buffer.Length);
             }
             catch
             {
-                // do something
+                // print a message?
             }
 
         }

@@ -9,7 +9,6 @@ namespace FlightSimulator.Model.EventArgs
 {
     public class VirtualJoystickEventArgs
     {
-        
         #region Singleton
         private static VirtualJoystickEventArgs j_Instance = null;
         public static VirtualJoystickEventArgs Instance
@@ -24,7 +23,6 @@ namespace FlightSimulator.Model.EventArgs
             }
         }
         #endregion
-        
 
         public double Aileron { get; set; }
         public double Elevator { get; set; }

@@ -66,7 +66,7 @@ namespace FlightSimulator.Communication
             
             string data = "";
 
-            while (numBytes != -1)
+            while (numBytes != Consts.READ_FAILED)
             {
                 try
                 {
