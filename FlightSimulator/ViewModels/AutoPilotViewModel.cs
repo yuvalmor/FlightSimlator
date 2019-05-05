@@ -10,14 +10,17 @@ namespace FlightSimulator.ViewModels
 {
     class AutoPilotViewModel : BaseNotify
     {
+        // Holds the commands in the autoPilot text box
         private string textCommand;
         public string TextCommand
         {
             get => textCommand;
             set
             {
+                // Checks that the property changed
                 if (textCommand != value)
                 {
+                    // Update the property value
                     textCommand = value;
                     NotifyPropertyChanged("textCommand");
                     // Update the length of the text
@@ -25,7 +28,7 @@ namespace FlightSimulator.ViewModels
                 }
             }
         }
-
+        // Holds the length of the text in the text box
         private int length;
         public int Length
         {
@@ -62,23 +65,33 @@ namespace FlightSimulator.ViewModels
         private void AutoPilot()
         {
             Client client = Client.Instance;
+            // Split all the commands into lines
             string[] lines = textCommand.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
             for (int i = 0; i < lines.Length; i++)
             {
                 // Checks if the line isnt empty
                 if (lines[i] != Consts.EMPTY_STRING)
                 {
+                    // Add the windows enter suffix to the line ("\r\n")
                     lines[i] += Consts.NEW_LINE;
+                    // Write the command to the simulator using the function: writeDataToSimulator
                     client.writeDataToSimulator(lines[i]);
+                    // The thread is sleep for 2 seconds
                     Thread.Sleep(Consts.SLEEP_TIME);
                 }
             }
         }
 
+        /*
+         * Send the commands from the textbox to the simulator
+         */
         private void SendCommands()
         {
+            // Initial the length of the text to zero
             Length = 0;
+            // create new task that points to the autoPilor function
             Task autoPilotTask = new Task(AutoPilot);
+            // Start the task
             autoPilotTask.Start();
         }
     }
