@@ -25,6 +25,7 @@ namespace FlightSimulator.Communication
         #endregion
 
         private TcpClient sender;
+        private NetworkStream stream;
 
         public Client()
         {
@@ -63,15 +64,20 @@ namespace FlightSimulator.Communication
             {
                 ASCIIEncoding asen = new ASCIIEncoding();
                 byte[] buffer = asen.GetBytes(data);
-                NetworkStream stream = sender.GetStream();
+                this.stream = sender.GetStream();
                 stream.Write(buffer, 0, buffer.Length);
             }
             catch
             {
                 // print a message? error?
-
             }
 
+        }
+
+        public void closeStream()
+        {
+            this.stream.Close();
+            this.sender.Close();
         }
     }
 }

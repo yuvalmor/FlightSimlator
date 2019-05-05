@@ -36,6 +36,7 @@ namespace FlightSimulator.Communication
         private TcpListener listener;
         private ISettingsModel settings;
         private TcpClient client;
+        private NetworkStream stream;
         private Task listenTask;
 
         public SettingsWindowViewModel Settings
@@ -59,7 +60,7 @@ namespace FlightSimulator.Communication
         
         private void readDataFromSimulator()
         {
-            NetworkStream stream = this.client.GetStream();
+            this.stream = this.client.GetStream();
             int numBytes = 0;
             byte[] buffer = new byte[Consts.BUFFER_SIZE];
             byte[] str = new byte[Consts.BUFFER_SIZE];
@@ -95,6 +96,7 @@ namespace FlightSimulator.Communication
 
         public void closeStream()
         {
+            this.stream.Close();
             this.client.Close();
             this.listener.Stop();
         }

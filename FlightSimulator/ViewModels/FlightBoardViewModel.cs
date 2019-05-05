@@ -70,8 +70,8 @@ namespace FlightSimulator.ViewModels
         {
             Server server = Server.Instance;
             server.closeStream();
-            // ANYTHING ELSE?
-
+            Client client = Client.Instance;
+            client.closeStream();
         }
 
         #endregion
