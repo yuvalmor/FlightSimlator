@@ -9,7 +9,8 @@
     <Grid>
         <Views:FlightBoardController Margin="0,-14,83.333,-0.333"></Views:FlightBoardController>
         <Views:Controller Margin="392,60,28.333,60.667"></Views:Controller>
-        <TextBlock HorizontalAlignment="Left"  Margin="245,5,0,0" TextWrapping="Wrap" FontWeight="Bold" Text="Flight Simulator" FontSize="28"  VerticalAlignment="Top" Height="50" Width="220"/>
+        <TextBlock HorizontalAlignment="Left"  Margin="245,5,0,0" TextWrapping="Wrap" FontWeight="Bold" 
+                   Text="Flight Simulator" FontSize="28"  VerticalAlignment="Top" Height="50" Width="220"/>
         <Image Margin="460,5,248.333,370.667" Source="/FlightSimulator;component/Photos/airplain.png" Stretch="Fill" RenderTransformOrigin="0.389,0.393"/>
     </Grid>
 </Window>
