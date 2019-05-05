@@ -24,7 +24,7 @@ namespace FlightSimulator.ViewModels
             }
             set {
                 rudder = value;
-                this.NotifySliderChanged("Rudder");
+                this.NotifySliderChanged(Consts.RUDDER);
             }
         }
         private double throttle;
@@ -36,7 +36,7 @@ namespace FlightSimulator.ViewModels
             set
             {
                 throttle = value;
-                this.NotifySliderChanged("Throttle");
+                this.NotifySliderChanged(Consts.THROTTLE);
             }
         }
         private double elevator;
@@ -50,13 +50,43 @@ namespace FlightSimulator.ViewModels
             set { aileron = value; }
         }
         
+        public string prepareStringOfData(string param, double value)
+        {
+            string data = "set ";
+            switch (param)
+            {
+                case Consts.RUDDER:
+                    data += Consts.RUDDER_XML + " " + value + Consts.NEW_LINE;
+                    break;
+                case Consts.THROTTLE:
+                    data += Consts.THROTTLE_XML + " " + value + Consts.NEW_LINE;
+                    break;
+                case Consts.ELEVATOR:
+                    data += Consts.ELEVATOR_XML + " " + value + Consts.NEW_LINE;
+                    break;
+                case Consts.AILERON:
+                    data += Consts.AILERON_XML + " " + value + Consts.NEW_LINE;
+                    break;
+                default:
+                    return "";
+            }
+            return data;
+        }
+
+        public void backToPlace(Joystick sender)
+        {
+            string dataAileron = this.prepareStringOfData(Consts.AILERON, sender.Aileron);
+            string dataElevator = this.prepareStringOfData(Consts.ELEVATOR, sender.Elevator);
+
+            Client client = Client.Instance;
+            client.writeDataToSimulator(dataAileron);
+            client.writeDataToSimulator(dataElevator);
+        }
+
         public void NotifyJoystickChanged(Joystick sender, VirtualJoystickEventArgs args)
         {
-            string dataAileron = "set ";
-            string dataElevator = "set ";
-
-            dataAileron += Consts.AILERON_XML + " " + args.Aileron + Consts.NEW_LINE;
-            dataElevator += Consts.ELEVATOR_XML + " " + args.Elevator + Consts.NEW_LINE;
+            string dataAileron = this.prepareStringOfData(Consts.AILERON, args.Aileron);
+            string dataElevator = this.prepareStringOfData(Consts.ELEVATOR, args.Elevator);
             
             Client client = Client.Instance;
             client.writeDataToSimulator(dataAileron);
@@ -65,16 +95,18 @@ namespace FlightSimulator.ViewModels
 
         public void NotifySliderChanged(string param)
         {
-            string data = "set ";
+            string data = "";
+            Client client = Client.Instance;
+
             if (param.Equals("Rudder"))
             {
-                data += Consts.RUDDER_XML + " " + this.rudder + Consts.NEW_LINE;
-            } else
-            {
-                data += Consts.THROTTLE_XML + " " + this.throttle + Consts.NEW_LINE;
+                data = this.prepareStringOfData("Rudder", this.rudder);
+                client.writeDataToSimulator(data);
+                return;
             }
-            Client client = Client.Instance;
+            data = this.prepareStringOfData("Throttle", this.throttle);
             client.writeDataToSimulator(data);
         }
+       
     }
 }

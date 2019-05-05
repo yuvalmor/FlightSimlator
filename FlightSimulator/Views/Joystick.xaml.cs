@@ -180,7 +180,6 @@ namespace FlightSimulator.Views
             Moved?.Invoke(this, new VirtualJoystickEventArgs { Aileron = Aileron, Elevator = Elevator });
             _prevAileron = Aileron;
             _prevElevator = Elevator;
-
         }
 
         private void Knob_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
