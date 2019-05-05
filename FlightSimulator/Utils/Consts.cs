@@ -21,5 +21,7 @@ namespace FlightSimulator.Utils
         public const string ELEVATOR_XML = "/controls/flight/elevator";
         //public const string AILERON_PROPERTY = "Aileron";
         public const string NEW_LINE = "\r\n";
+        public const int SLEEP_TIME = 2000;
+        public const string EMPTY_STRING = "";
     }
 }

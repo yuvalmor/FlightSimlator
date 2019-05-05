@@ -1,18 +1,15 @@
 ﻿using FlightSimulator.Communication;
 using FlightSimulator.Model;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Input;
+using FlightSimulator.Utils;
+using System.Threading.Tasks;
 
 namespace FlightSimulator.ViewModels
 {
     class AutoPilotViewModel : BaseNotify
     {
-        private int length; 
         private string textCommand;
         public string TextCommand
         {
@@ -23,20 +20,22 @@ namespace FlightSimulator.ViewModels
                 {
                     textCommand = value;
                     NotifyPropertyChanged("textCommand");
+                    // Update the length of the text
                     Length = textCommand.Length;
                 }
             }
         }
 
+        private int length;
         public int Length
         {
-            get => length;
             set
             {
                 length = value;
                 NotifyPropertyChanged("length");
             }
         }
+
         private ICommand _clearCommand;
         public ICommand ClearCommand {
             get
@@ -59,18 +58,18 @@ namespace FlightSimulator.ViewModels
             }
         }
 
-
         private void AutoPilot()
         {
             Client client = Client.Instance;
             string[] lines = textCommand.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
             for (int i = 0; i < lines.Length; i++)
             {
-                if (lines[i] != "")
+                // Checks if the line isnt empty
+                if (lines[i] != Consts.EMPTY_STRING)
                 {
-                    lines[i] += "\r\n";
+                    lines[i] += Consts.NEW_LINE;
                     client.writeDataToSimulator(lines[i]);
-                    Thread.Sleep(2000);
+                    Thread.Sleep(Consts.SLEEP_TIME);
                 }
             }
         }
@@ -78,8 +77,8 @@ namespace FlightSimulator.ViewModels
         private void SendCommands()
         {
             Length = 0;
-            Thread thread = new Thread(AutoPilot);
-            thread.Start();
+            Task autoPilotTask = new Task(AutoPilot);
+            autoPilotTask.Start();
         }
     }
 }
