@@ -45,12 +45,13 @@ namespace FlightSimulator.Communication
         {
             settings = ApplicationSettingsModel.Instance;
             listener = new TcpListener(IPAddress.Parse(settings.FlightServerIP), settings.FlightInfoPort);
+            
         }
 
         public void listen()
         {
             listener.Start();
-            TcpClient client = listener.AcceptTcpClient();
+            client = listener.AcceptTcpClient();
             listenTask = new Task(readDataFromSimulator);
             listenTask.Start();
             // join? detach?
