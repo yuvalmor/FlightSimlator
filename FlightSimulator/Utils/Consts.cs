@@ -1,7 +1,7 @@
 ﻿
 namespace FlightSimulator.Utils
 {
-    // defining constants in the project
+    // defining constants for the project
     class Consts
     {
         public const int BUFFER_SIZE = 1024;
