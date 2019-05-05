@@ -22,5 +22,9 @@ namespace FlightSimulator.Utils
         public const string NEW_LINE = "\r\n";
         public const int SLEEP_TIME = 2000;
         public const string EMPTY_STRING = "";
+        public const string RUDDER = "Rudder";
+        public const string ELEVATOR = "Elevator";
+        public const string THROTTLE = "Throttle";
+        public const string AILERON = "Aileron";
     }
 }

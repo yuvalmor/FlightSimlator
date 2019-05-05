@@ -14,7 +14,9 @@ namespace FlightSimulator.Views
             InitializeComponent();
             vm = new JoystickViewModel();
             this.DataContext = vm;
+
             joystick.Moved += vm.NotifyJoystickChanged;
+            joystick.Released += vm.backToPlace;
         }
 
 
