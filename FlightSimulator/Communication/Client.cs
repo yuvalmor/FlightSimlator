@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Sockets;
 using System.Text;
-using System.Threading.Tasks;
 using FlightSimulator.Model;
 
 namespace FlightSimulator.Communication
@@ -47,7 +46,8 @@ namespace FlightSimulator.Communication
             {
                 try
                 {
-                    sender.Connect(ApplicationSettingsModel.Instance.FlightServerIP, ApplicationSettingsModel.Instance.FlightCommandPort);
+                    sender.Connect(ApplicationSettingsModel.Instance.FlightServerIP,
+                                    ApplicationSettingsModel.Instance.FlightCommandPort);
                     break;
                 } catch
                 {
@@ -68,7 +68,8 @@ namespace FlightSimulator.Communication
             }
             catch
             {
-                // print a message?
+                // print a message? error?
+
             }
 
         }
