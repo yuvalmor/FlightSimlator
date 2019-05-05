@@ -166,15 +166,15 @@ namespace FlightSimulator.Views
             // here i changed the axis
             Aileron = deltaPos.X / (canvasWidth / 2);
             Elevator = -deltaPos.Y / (canvasWidth / 2);
-            //Aileron = deltaPos.X;
-            //Elevator = -deltaPos.Y;
-
+            
             knobPosition.X = deltaPos.X;
             knobPosition.Y = deltaPos.Y;
 
-           
+            double normalizedAileronStep = this.AileronStep / (canvasWidth / 2);
+            double normalizedElevatorStep = this.ElevatorStep / (canvasWidth / 2);
+
             if (Moved == null ||
-                (!(Math.Abs(_prevAileron - Aileron) > AileronStep) && !(Math.Abs(_prevElevator - Elevator) > ElevatorStep)))
+                (!(Math.Abs(_prevAileron - Aileron) > normalizedAileronStep) && !(Math.Abs(_prevElevator - Elevator) > normalizedElevatorStep)))
                 return;
 
             Moved?.Invoke(this, new VirtualJoystickEventArgs { Aileron = Aileron, Elevator = Elevator });

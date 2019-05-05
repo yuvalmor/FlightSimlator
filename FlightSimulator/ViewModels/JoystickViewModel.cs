@@ -23,17 +23,8 @@ namespace FlightSimulator.ViewModels
                 return rudder;
             }
             set {
-
-                double newRudder = value;
-                if (newRudder - rudder > 0)
-                {
-                    rudder = newRudder;
-                    NotifyPropertyChanged("Rudder");
-                }
-                else
-                {
-                    rudder = value;
-                }
+                rudder = value;
+                this.NotifySliderChanged("Rudder");
             }
         }
         private double throttle;
@@ -44,89 +35,46 @@ namespace FlightSimulator.ViewModels
             }
             set
             {
-                double newThrottle = value;
-                if (newThrottle - throttle > 0)
-                {
-                    throttle = newThrottle;
-                    NotifyPropertyChanged("Throttle");
-                }
-                else
-                {
-                    throttle = value;
-                }
+                throttle = value;
+                this.NotifySliderChanged("Throttle");
             }
         }
         private double elevator;
         public double Elevator {
-            private get
-            {
-                return elevator;
-            }
-            set
-            {
-                double newElevator = value;
-                if (newElevator - elevator > 0)
-                {
-                    elevator = newElevator;
-                    NotifyPropertyChanged("Elevator");
-                }
-                else
-                {
-                    elevator = value;
-                }
-            }
+            private get { return elevator; }
+            set {elevator = value; }
         }
         private double aileron;
         public double Aileron {
-            private get
-            {
-                return aileron;
-            }
-            set
-            {
-                double newAileron = value;
-                if (newAileron - aileron > 0)
-                {
-                    aileron = newAileron;
-                    NotifyPropertyChanged("Aileron");
-                }
-                else
-                {
-                    aileron = value;
-                }
-            }
+            private get { return aileron; }
+            set { aileron = value; }
         }
         
-        public void NotifyPropertyChanged(string propName)
+        public void NotifyJoystickChanged(Joystick sender, VirtualJoystickEventArgs args)
         {
+            string dataAileron = "set ";
+            string dataElevator = "set ";
 
-            string data = "set ";
-
-            switch (propName)
-            {
-                case "Rudder":
-                    data += Consts.RUDDER_XML + " " + this.Rudder.ToString() + Consts.NEW_LINE;
-                    break;
-                case "Elevator":
-                    data += Consts.ELEVATOR_XML + " " + this.Elevator.ToString() + Consts.NEW_LINE;
-                    break;
-                case "Aileron":
-                    data += Consts.AILERON_XML + " " + this.Aileron.ToString() + Consts.NEW_LINE;
-                    break;
-                case "Throttle":
-                    data += Consts.THROTTLE_XML + " " + this.Throttle.ToString() + Consts.NEW_LINE;
-                    break;
-                default:
-                    return;
-
-
-            }
-
-            Client client = Client.Instance;
-            client.writeDataToSimulator(data);
+            dataAileron += Consts.AILERON_XML + " " + args.Aileron + Consts.NEW_LINE;
+            dataElevator += Consts.ELEVATOR_XML + " " + args.Elevator + Consts.NEW_LINE;
             
+            Client client = Client.Instance;
+            client.writeDataToSimulator(dataAileron);
+            client.writeDataToSimulator(dataElevator);
         }
 
-
+        public void NotifySliderChanged(string param)
+        {
+            string data = "set ";
+            if (param.Equals("Rudder"))
+            {
+                data += Consts.RUDDER_XML + " " + this.rudder + Consts.NEW_LINE;
+            } else
+            {
+                data += Consts.THROTTLE_XML + " " + this.throttle + Consts.NEW_LINE;
+            }
+            Client client = Client.Instance;
+            client.writeDataToSimulator(data);
+        }
     }
 }

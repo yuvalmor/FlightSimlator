@@ -27,15 +27,14 @@ namespace FlightSimulator.Views
     /// </summary>
     public partial class JoystickController : UserControl
     {
+        JoystickViewModel vm;
         public JoystickController()
         {
             InitializeComponent();
-            DataContext = new JoystickViewModel();
-
+            vm = new JoystickViewModel();
+            this.DataContext = vm;
+            joystick.Moved += vm.NotifyJoystickChanged;
         }
-
-
-
 
     }
 }
