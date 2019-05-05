@@ -1,14 +1,5 @@
 ﻿using FlightSimulator.Communication;
-using FlightSimulator.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
 using FlightSimulator.Model.EventArgs;
-using System.ComponentModel;
 using FlightSimulator.Utils;
 using FlightSimulator.Views;
 
@@ -50,6 +41,7 @@ namespace FlightSimulator.ViewModels
             set { aileron = value; }
         }
         
+        // creating string for the simulator in the proper pattern by field and value
         public string prepareStringOfData(string param, double value)
         {
             string data = "set ";
@@ -73,6 +65,7 @@ namespace FlightSimulator.ViewModels
             return data;
         }
 
+        // function invoked when the joystick is released, send reset values
         public void backToPlace(Joystick sender)
         {
             string dataAileron = this.prepareStringOfData(Consts.AILERON, sender.Aileron);
@@ -83,6 +76,7 @@ namespace FlightSimulator.ViewModels
             client.writeDataToSimulator(dataElevator);
         }
 
+        // function invoked when the joystick properties are changed, send data to simulator
         public void NotifyJoystickChanged(Joystick sender, VirtualJoystickEventArgs args)
         {
             string dataAileron = this.prepareStringOfData(Consts.AILERON, args.Aileron);
@@ -93,6 +87,7 @@ namespace FlightSimulator.ViewModels
             client.writeDataToSimulator(dataElevator);
         }
 
+        // function invoked when the sliders properties are changed, send data to simulator
         public void NotifySliderChanged(string param)
         {
             string data = "";

@@ -1,6 +1,7 @@
 ﻿
 namespace FlightSimulator.Utils
 {
+    // defining constants in the project
     class Consts
     {
         public const int BUFFER_SIZE = 1024;
@@ -21,5 +22,7 @@ namespace FlightSimulator.Utils
         public const string ELEVATOR = "Elevator";
         public const string THROTTLE = "Throttle";
         public const string AILERON = "Aileron";
+        public const string PINK_BRUSH = "#ffc5d6";
+        public const string WHITE_BRUSH = "#FFFFFF";
     }
 }

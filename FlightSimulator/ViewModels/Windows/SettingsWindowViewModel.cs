@@ -1,12 +1,5 @@
 ﻿using FlightSimulator.Model;
 using FlightSimulator.Model.Interface;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace FlightSimulator.ViewModels.Windows
@@ -14,7 +7,6 @@ namespace FlightSimulator.ViewModels.Windows
     public class SettingsWindowViewModel : BaseNotify
     {
         private ISettingsModel model;
-
         public SettingsWindowViewModel(ISettingsModel model)
         {
             this.model = model;
@@ -61,6 +53,7 @@ namespace FlightSimulator.ViewModels.Windows
         }
 
         #region Commands
+        // click command - save settings
         #region ClickCommand
         private ICommand _clickCommand;
         public ICommand ClickCommand
@@ -75,7 +68,7 @@ namespace FlightSimulator.ViewModels.Windows
             model.SaveSettings();
         }
         #endregion
-
+        // cancel command - leave window without saving
         #region CancelCommand
         private ICommand _cancelCommand;
         public ICommand CancelCommand

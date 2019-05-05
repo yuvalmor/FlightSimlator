@@ -40,6 +40,7 @@ namespace FlightSimulator.ViewModels
             }
         }
 
+        // clear the content in the textbox using the function ClearText
         private ICommand _clearCommand;
         public ICommand ClearCommand {
             get
@@ -47,12 +48,12 @@ namespace FlightSimulator.ViewModels
                 return _clearCommand ?? (_clearCommand = new CommandHandler(() => ClearText()));
             }
         }
-
-        private void ClearText()
-        {
-            TextCommand = "";
-        }
-
+        // clear the context
+        private void ClearText(){TextCommand = Consts.EMPTY_STRING;}
+        /*
+         * send the commands that written in the textbox to the simulator,
+         * using the function SendCommands
+        */
         private ICommand _okCommand;
         public ICommand OKCommand
         {

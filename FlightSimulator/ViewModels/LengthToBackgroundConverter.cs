@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FlightSimulator.Utils;
+using System;
 using System.Globalization;
 using System.Windows.Data;
 using System.Windows.Media;
@@ -15,9 +16,9 @@ namespace FlightSimulator.ViewModels
         {
             BrushConverter converter = new BrushConverter();
             if ((int)value > 0) 
-                    return converter.ConvertFromString("#ffc5d6") as Brush;
+                    return converter.ConvertFromString(Consts.PINK_BRUSH) as Brush;
                 else
-                    return converter.ConvertFromString("#FFFFFF") as Brush;
+                    return converter.ConvertFromString(Consts.WHITE_BRUSH) as Brush;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

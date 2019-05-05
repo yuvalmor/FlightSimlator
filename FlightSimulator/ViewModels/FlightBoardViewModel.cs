@@ -17,6 +17,7 @@ namespace FlightSimulator.ViewModels
         public double Lat { get; }
 
         #region Commands
+        // connect commad - send to creation of server and client linking
         #region ConnectCommand
         private ICommand _connectCommand;
         public ICommand ConnectCommand
@@ -35,6 +36,7 @@ namespace FlightSimulator.ViewModels
         }
 
         #endregion
+        // settings command - change settings data
         #region SettingsCommand
 
         private ICommand _settingsCommand;
@@ -54,6 +56,7 @@ namespace FlightSimulator.ViewModels
         }
 
         #endregion
+        // disconnect command - close the sockets
         #region DisConnectCommand
 
         private ICommand _disconnectCommand;
@@ -75,9 +78,6 @@ namespace FlightSimulator.ViewModels
         }
 
         #endregion
-
-
-
         #endregion
     }
 }

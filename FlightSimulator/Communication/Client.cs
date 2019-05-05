@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Sockets;
+﻿using System.Net.Sockets;
 using System.Text;
 using FlightSimulator.Model;
 
@@ -41,8 +38,7 @@ namespace FlightSimulator.Communication
             // when we run the simulator also opens it's on server
             server.listen();
 
-            // here we connet as clients to the simultor server, channel command
-            
+            // here we connet as clients to the simultor server, channel command       
             while (true)
             {
                 try
@@ -55,9 +51,9 @@ namespace FlightSimulator.Communication
                     continue;
                 }
             }
-            
         }
 
+        // send data via command channel
         public void writeDataToSimulator(string data)
         {
             try
@@ -67,13 +63,10 @@ namespace FlightSimulator.Communication
                 this.stream = sender.GetStream();
                 stream.Write(buffer, 0, buffer.Length);
             }
-            catch
-            {
-                // print a message? error?
-            }
-
+            catch{}
         }
 
+        // close connection when disconnect is hit
         public void closeStream()
         {
             this.stream.Close();
