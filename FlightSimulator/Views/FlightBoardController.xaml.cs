@@ -13,6 +13,7 @@ namespace FlightSimulator.Views
         {
             InitializeComponent();
             vm = new FlightBoardViewModel();
+            // data contex to the binding fields in the xaml
             this.DataContext = vm;
         }
     }

@@ -9,26 +9,22 @@ namespace FlightSimulator.Views.Windows
     /// </summary>
     public partial class Settings : Window
     {
-        private SettingsWindowViewModel vm;
         public Settings()
         {
             InitializeComponent();
-            //vm = new SettingsWindowViewModel(ApplicationSettingsModel.Instance);
-            //this.DataContext = vm;
+            // inserting the app model to the vm instance
             DataContext=new SettingsWindowViewModel(new ApplicationSettingsModel());
         }
 
+        // closing the settings window after saving the data
         private void OKCommand_Click(object sender, RoutedEventArgs e)
         {
-            /*MainWindow win = (MainWindow)Application.Current.MainWindow;
-            win.Show();*/
             Close();
         }
 
+        // closing the settings window after cancel click
         private void CancleCommand_Click(object sender, RoutedEventArgs e)
         {
-            /*MainWindow win = (MainWindow)Application.Current.MainWindow;
-            win.Show();*/
             Close();
         }
     }

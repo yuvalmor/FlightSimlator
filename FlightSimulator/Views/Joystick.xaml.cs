@@ -28,11 +28,6 @@ namespace FlightSimulator.Views
         public static readonly DependencyProperty ElevatorStepProperty =
             DependencyProperty.Register("ElevatorStep", typeof(double), typeof(Joystick), new PropertyMetadata(1.0));
 
-        /* Unstable - needs work */
-        ///// <summary>Indicates whether the joystick knob resets its place after being released</summary>
-        //public static readonly DependencyProperty ResetKnobAfterReleaseProperty =
-        //    DependencyProperty.Register(nameof(ResetKnobAfterRelease), typeof(bool), typeof(VirtualJoystick), new PropertyMetadata(true));
-
         /// <summary>Current Aileron in degrees from 0 to 360</summary>
         public double Aileron
         {
@@ -74,13 +69,6 @@ namespace FlightSimulator.Views
                 SetValue(ElevatorStepProperty, value);
             }
         }
-
-        /// <summary>Indicates whether the joystick knob resets its place after being released</summary>
-        //public bool ResetKnobAfterRelease
-        //{
-        //    get { return Convert.ToBoolean(GetValue(ResetKnobAfterReleaseProperty)); }
-        //    set { SetValue(ResetKnobAfterReleaseProperty, value); }
-        //}
 
         /// <summary>Delegate holding data for joystick state change</summary>
         /// <param name="sender">The object that fired the event</param>
@@ -131,30 +119,28 @@ namespace FlightSimulator.Views
 
         private void Knob_MouseMove(object sender, MouseEventArgs e)
         {
-            ///!!!!!!!!!!!!!!!!!
-            /// YOU MUST CHANGE THE FUNCTION!!!!
-            ///!!!!!!!!!!!!!!
-
-            if (!Knob.IsMouseCaptured) return; // if the mouse is not pressed - do nothing
-
-            Point newPos = e.GetPosition(Base); // get the position we moved to
-
-            Point deltaPos = new Point(newPos.X - _startPos.X, newPos.Y - _startPos.Y); // calculate differnece in x,y
-
-            double distance = Math.Round(Math.Sqrt(deltaPos.X * deltaPos.X + deltaPos.Y * deltaPos.Y)); // distance between two points
+            // if the mouse is not pressed - do nothing
+            if (!Knob.IsMouseCaptured) return; 
+            // get the position we moved to
+            Point newPos = e.GetPosition(Base);
+            // calculate differnece in x,y
+            Point deltaPos = new Point(newPos.X - _startPos.X, newPos.Y - _startPos.Y);
+            // distance between two points
+            double distance = Math.Round(Math.Sqrt(deltaPos.X * deltaPos.X + deltaPos.Y * deltaPos.Y)); 
 
             // canvasWidth is set to be the difference between the the diameter of the big circle and the diameter of the little knob.
             // this makes sure we do not cross the knob area.
             if (distance >= canvasWidth / 2 || distance >= canvasHeight / 2)  
                 return;
 
-            // here i changed the axis
+            // changed the axis and add normalization 
             Aileron = deltaPos.X / (canvasWidth / 2);
             Elevator = -deltaPos.Y / (canvasWidth / 2);
             
             knobPosition.X = deltaPos.X;
             knobPosition.Y = deltaPos.Y;
 
+            // normalized values for comparision
             double normalizedAileronStep = this.AileronStep / (canvasWidth / 2);
             double normalizedElevatorStep = this.ElevatorStep / (canvasWidth / 2);
 
@@ -178,6 +164,5 @@ namespace FlightSimulator.Views
             Aileron = Elevator = _prevAileron = _prevElevator = 0;
             Released?.Invoke(this);
         }
-
     }
 }

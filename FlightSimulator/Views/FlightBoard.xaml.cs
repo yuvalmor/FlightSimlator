@@ -18,7 +18,7 @@ namespace FlightSimulator.Views
         public FlightBoard()
         {
             InitializeComponent();
-
+            // create server instance and register to the property changed event
             Server server = Server.Instance;
             server.PropertyChanged += this.Vm_PropertyChanged;
         }
@@ -33,7 +33,7 @@ namespace FlightSimulator.Views
 
         private void Vm_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            string check = e.PropertyName;
+            // spilting the args from simulator to x,y and sending for paiting
             string[] fields = e.PropertyName.Split(',');
             double lon = Double.Parse(fields[0]);
             double lat = Double.Parse(fields[1]);
