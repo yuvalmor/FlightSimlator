@@ -28,10 +28,8 @@
                 </Image.RenderTransform>
             </Image>
             <Image Source="/FlightSimulator;component/Photos/rudder.png" Margin="267,187.667,313,30" Grid.Row="1"/>
-            <Slider Name="ThrottleSlider" Value="{Binding Throttle, Mode=OneWayToSource}" 
-                    HorizontalAlignment="Left" Margin="-11,254,0,0" VerticalAlignment="Top"  Height="33" Width="344"
-                    RenderTransformOrigin="0.5,0.5" IsSnapToTickEnabled="True" Maximum="1" Minimum="0" 
-                    TickPlacement="BottomRight" TickFrequency="0.1" >
+            <Slider Name="ThrottleSlider" Value="{Binding Throttle, UpdateSourceTrigger=PropertyChanged, Mode=OneWayToSource}" HorizontalAlignment="Left" Margin="-11,254,0,0" VerticalAlignment="Top"  Height="33" Width="344"
+                    RenderTransformOrigin="0.5,0.5" IsSnapToTickEnabled="True" Maximum="1" Minimum="0" TickPlacement="BottomRight" TickFrequency="0.1" >
                 <Slider.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -41,10 +39,8 @@
                     </TransformGroup>
                 </Slider.RenderTransform>
             </Slider>
-            <Slider Name="RudderSlider" Value="{Binding Rudder, Mode=OneWayToSource}" HorizontalAlignment="Left" 
-                    Margin="160,144.333,0,0" Grid.Row="1" VerticalAlignment="Top" 
-                    Height="26" Width="427" Minimum="-1" Maximum="1" 
-                    TickPlacement="BottomRight" TickFrequency="0.1" IsSnapToTickEnabled="True" />
+            <Slider Name="RudderSlider" Value="{Binding Rudder, Mode=OneWayToSource}" HorizontalAlignment="Left" Margin="160,144.333,0,0" Grid.Row="1" VerticalAlignment="Top" 
+                    Height="26" Width="427" Minimum="-1" Maximum="1" TickPlacement="BottomRight" TickFrequency="0.1" IsSnapToTickEnabled="True" />
             <TextBox HorizontalAlignment="Left" Height="50" Margin="140,10,0,0" TextWrapping="Wrap" FontSize="29" FontWeight="Bold"
                      VerticalAlignment="Top" Width="106" Text="{Binding ElementName=ThrottleSlider, Path=Value}" BorderThickness="0" />
             <TextBox HorizontalAlignment="Left" Height="50" Margin="601,128.333,0,0" TextWrapping="Wrap" FontSize="29" FontWeight="Bold"
