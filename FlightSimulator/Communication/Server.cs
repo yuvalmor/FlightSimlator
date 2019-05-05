@@ -50,7 +50,7 @@ namespace FlightSimulator.Communication
         public void listen()
         {
             listener.Start();
-            TcpClient client = listener.AcceptTcpClient();
+            client = listener.AcceptTcpClient();
             listenTask = new Task(readDataFromSimulator);
             listenTask.Start();
             // join? detach?

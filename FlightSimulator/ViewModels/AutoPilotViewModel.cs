@@ -13,7 +13,7 @@ namespace FlightSimulator.ViewModels
         private string textCommand;
         public string TextCommand
         {
-            get=> textCommand; 
+            get => textCommand;
             set
             {
                 if (textCommand != value)
@@ -29,6 +29,7 @@ namespace FlightSimulator.ViewModels
         private int length;
         public int Length
         {
+            get => length;
             set
             {
                 length = value;
